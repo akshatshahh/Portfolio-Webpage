@@ -1,20 +1,32 @@
 ---
 import EducationItem from "./EducationItem.astro"
+
 const EDUCATION = [
+    {
+        date: "2024 - 2026",
+        degree: "Master of Science",
+        institution: "Viterbi School of Engineering, University of Southern California, Los Angeles",
+        description:
+            "Specialization in Computer Science. Relevant coursework includes Data Structures, Algorithms & Database.",
+        
+    },
+
 {
         date: "2020 - 2024",
         degree: "Bachelor of Technology",
-        institution: "Institute of Technology, Nirma University, Ahmedabad",
+        institution: "Indus Institute of Technology & Engineering, Indus University, Ahmedabad",
         description:
-            "Specialization in Computer Science and Engineering. Relevant coursework includes Data Structures, Algorithms, Machine Learning, and Artificial Intelligence.",
-    },
+            "Specialization in Computer Science and Engineering. Relevant coursework includes Data Structures, Algorithms, Machine Learning, Web Development and Operating System.",
+        grade:"3.86 GPA"    
+    }
+    
     // Add more education items here
 ]
 ---
 <ol class="relative mt-16">
     {
         EDUCATION.map((education) => (
-            <li class="">
+            <li class="education">
                 <EducationItem {...education} />
             </li>
         ))

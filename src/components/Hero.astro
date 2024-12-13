@@ -1,21 +1,22 @@
 ---
-const personalImageAlt = "Devasy Patel"
+const personalImageAlt = "Akshat Shah"
 import Badge from "@/components/Badge.astro"
 import LinkedInIcon from "@/components/icons/LinkedIn.astro"
 import MailIcon from "@/components/icons/Mail.astro"
 import GithubIcon from "@/components/icons/GitHub.astro"
 import SocialPill from "@/components/SocialPill.astro"
+//import InstagramIcon from "@/components/icons/Instagram.astro"
 ---
 
 <div class="max-w-xl">
   <div class="flex gap-4 mb-4">
     <img
       class="rounded-full shadow-lg size-16"
-      src="/devasy.webp"
+      src="/profile-pic.png"
       alt={personalImageAlt}
     />
     <a
-      href="https://linkedin.com/in/devasy-patel"
+      href="https://linkedin.com/in/akshatshahh"
       target="_blank"
       rel="noopener"
       class="flex items-center transition md:justify-center md:hover:scale-105"
@@ -26,28 +27,31 @@ import SocialPill from "@/components/SocialPill.astro"
   <h1
     class="text-4xl font-bold tracking-tight text-gray-800 sm:text-5xl dark:text-white"
   >
-  Hey, I'm Devasy Patel
+  Hey, I'm Akshat Shah
   </h1>
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
   Aspiring <strong
-      >Data Scientist/ML Engineer</strong
-    > Building data-driven solutions with Django, FastAPI, Streamlit.
-    Strong foundation in Python and machine learning libraries. Eager to learn and contribute to innovative projects.
-  </p>
+      >Software Engineer</strong
+    > Crafting scalable solutions with React, Node.js, and Django.
+    Passionate about data-driven problem solving and building user-centric applications. Proficient in Python, Java, and modern web technologies. Eager to contribute to innovative projects in software development.  </p>
   <nav class="flex flex-wrap gap-4 mt-8">
-    <SocialPill href="mailto:patel.devasy.23@gmail.com">
+    <SocialPill href="mailto:akshatshahh2003@gmail.com">
       <MailIcon class="size-4" />
       Contact me
     </SocialPill>
-    <SocialPill href="https://linkedin.com/in/devasy-patel">
+    <SocialPill href="https://linkedin.com/in/akshatshahh">
       <LinkedInIcon class="size-4" />
       LinkedIn
     </SocialPill>
-    <SocialPill href="https://github.com/Devasy23">
+    <SocialPill href="https://github.com/akshatshahh">
       <GithubIcon class="size-4" />
       GitHub
     </SocialPill>
+    <!-- <SocialPill href="https://instagram.com/thegajabfoodie">
+      <InstagramIcon class="size-4" />
+      Instagram
+    </SocialPill> -->
   </nav>
 </div>

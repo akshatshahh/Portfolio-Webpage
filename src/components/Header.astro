@@ -2,6 +2,11 @@
 import ThemeToggle from "./ThemeToggle.astro"
 
 const navItems = [
+{
+    title: "Education",
+    label: "education",
+    url: "/#education",
+  },
   {
     title: "Experience",
     label: "experience",
@@ -20,8 +25,13 @@ const navItems = [
   {
     title: "Contact",
     label: "contact",
-    url: "mailto:patel.devasy.23@gmail.com",
+    url: "mailto:akshatshahh2003@gmail.com",
   },
+  {
+    title: "Resume",
+    label: "Resume",
+    url: "https://drive.google.com/file/d/13RDGR1efdVMI67DmjAoe37pc8v--eEjA/view?usp=sharing",
+  }
 ]
 ---
 
@@ -37,6 +47,7 @@ const navItems = [
           class="relative block px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400"
           aria-label={link.label}
           href={link.url}
+          rel="noopener noreferrer"
         >
           {link.title}
         </a>

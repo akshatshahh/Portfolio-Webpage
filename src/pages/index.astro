@@ -14,7 +14,7 @@ import EducationHat from "@/components/icons/EducationHat.astro"
 ---
 
 <Layout
-  title="Devasy Patel Portfolio - ML Enthusiast, GenAI, Techie"
+  title="Akshat Shah Portfolio - Aspiring Software Engineer , Grad Student"
   description="You can find me at LinkedIn or Github"
 >
   <main class="px-4">
@@ -24,6 +24,15 @@ import EducationHat from "@/components/icons/EducationHat.astro"
     </Hero>
     </SectionContainer>
     <div class="space-y-24">
+      <SectionContainer id="education"> <!-- Add the Education section here -->
+        <h2
+          class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
+        >
+          <EducationHat class="size-8" />
+          Education
+        </h2>
+        <Education />
+      </SectionContainer>
     <SectionContainer id="experience">
       <h2
         class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
@@ -44,15 +53,7 @@ import EducationHat from "@/components/icons/EducationHat.astro"
       <Projects />
     </SectionContainer>
 
-    <SectionContainer id="education"> <!-- Add the Education section here -->
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
-      >
-        <EducationHat class="size-8" />
-        Education
-      </h2>
-      <Education />
-    </SectionContainer>
+
 
     <SectionContainer id="about-me">
       <h2

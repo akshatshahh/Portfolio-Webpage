@@ -10,6 +10,9 @@ import Tensorflow from "./icons/Tensorflow.astro"
 import Firebase from "./icons/Firebase.astro"
 import HEIC from "./icons/HEIC.astro"
 import Node from "./icons/Node.astro"
+import REACT from "./icons/ReactJS.astro"
+import Javascript from "./icons/Javascript.astro"
+import Svelte from "./icons/Svelte.astro"
 
 const TAGS = {
   NEXT: {
@@ -21,6 +24,11 @@ const TAGS = {
     name: "Tailwind CSS",
     class: "bg-[#003159] text-white",
     icon: Tailwind,
+  },
+  REACT: {
+    name: "ReactJS",
+    class: "bg-blue-600 text-white",
+    icon: REACT,
   },
   STREAMLIT: {
     name: "Streamlit",
@@ -42,10 +50,20 @@ const TAGS = {
     class: "bg-[#3776AB] text-white",
     icon: PythonIC,
   },
+  Javascript: {
+    name: "JavaScript",
+    class: "bg-[#3776AB] text-white",
+    icon: Javascript,
+  },
   HEIC: {
     name: "HEIC",
     class: "bg-[#ff4b4b] text-white",
     icon: HEIC,
+  },
+  Svelte: {
+    name: "Svelte",
+    class: "bg-[#ff4b4b] text-white",
+    icon: Node,
   },
   NODE: {
     name: "Node.js",
@@ -55,21 +73,22 @@ const TAGS = {
 }
 const PROJECTS = [
   {
-    title: "Image Captioning Project",
+    title: "Brief Bytes",
     description:
-      "Developed an Image Captioning project using a CNN-LSTM architecture, trained on the Flickr8k dataset, achieving over 60% accuracy in generating descriptive captions for images. Evaluated the model's performance using metrics such as BLEU score, showcasing the project's ability to generate captions that closely match human-written descriptions.",
-    link: "https://devasy23-image-captionning-project-app-5mulol.streamlit.app/",
-    github:"https://github.com/Devasy23/Image_captionning_project",
-    image: "/projects/image-captioning.webp", // replace with your project image path
-    tags: [TAGS.PYTHON, TAGS.STREAMLIT, TAGS.TENSORFLOW], // add tags if needed
+      "Designed and developed Brief Bytes, an innovative web platform using Svelte, JavaScript, Node.js, and PocketBase, aimed at simplifying news consumption for time-constrained users. The platform employs web scraping techniques to gather articles and machine learning for summarization, delivering concise yet informative summaries while offering the option to access full articles. Enhanced usability through intuitive UI/UX design and implemented a scalable backend to ensure seamless content delivery. This project empowered users with actionable insights, driving increased engagement and fostering an efficient news consumption experience.",
+    //link: "https://devasy23-image-captionning-project-app-5mulol.streamlit.app/",
+    github:"https://github.com/Suthar-Naresh/brief-bytes",
+    image: "/projects/briefbytes.png", // replace with your project image path
+    tags: [ TAGS.NODE,TAGS.Javascript,TAGS.TAILWIND,TAGS.TENSORFLOW], // add tags if needed
   },
   {
-    title: "Custom Object Detection System with TensorFlow.js and Firebase",
+    title: "Scholarship Finder",
     description:
-      "Developed a custom object detection system using Pretrained Effecientnet model using tensorflow, converted to TensorFlow.js for real-time deployment on a React website. Integrated Firebase for secure login authentication and displayed real-time object counts on a dynamic dashboard.",
-    image: "/projects/object-detection-system.webp", // replace with your project image path
-    link: "https://devasy23-object-detection-system-app-5mulol.streamlit.app/",
-    tags: [TAGS.PYTHON, TAGS.FIREBASE, TAGS.TENSORFLOW, TAGS.NODE], // add tags if needed
+      "Developed a web scraping system using BeautifulSoup to collect and parse scholarship data from multiple online sources,creating a comprehensive scholarship database.Implemented data cleaning and normalization techniques leveraging pandas to process and structure the collected scholarship information into a well-organized dataset.Devised a machine learning-based matching algorithm with scikit-learn to analyze user input and generate customized scholarship recommendations, improving search accuracy by 40",
+    image: "/projects/scholarshipfinder.png", // replace with your project image path
+    link: "https://aagam051-scholarship-finder-hackathon-t5joad.streamlit.app",
+    github:"https://github.com/Aagam051/Scholarship-Finder",
+    tags: [TAGS.PYTHON, TAGS.STREAMLIT], // add tags if needed
   },
   // {
   //   title: "Hybrid Movie Recommendation System",
@@ -79,13 +98,13 @@ const PROJECTS = [
   //   tags: [], // add tags if needed
   // },
   {
-    title: "JPG to HEIF Converter",
+    title: "Movie Recommender System",
     description:
-      "This project allows you to freely convert JPG images to HEIF format. HEIF (High Efficiency Image Format) is a more efficient image format in terms of storage and quality compared to traditional formats like JPG. Why HEIF? HEIF, as the name suggests, is a high-efficiency image format. Not only does it offer smaller file sizes compared to JPG, but it also provides better image quality. This makes it an excellent choice for anyone looking to save storage space without compromising on image quality.",
-    image: "/projects/jpg-to-heif-converter.webp", // replace with your project image path
-    link:"https://jpgtoheifconverter.streamlit.app/",
-    github:"https://github.com/Devasy23/JPG2HEIF", 
-    tags: [TAGS.PYTHON, TAGS.STREAMLIT, TAGS.HEIC], // add tags if needed "Streamlit", "Pillow", "HEIF"
+      "Engineered a content-based movie recommender system with TF-IDF vectorization and cosine similarity algorithms, attaining a 30% improvement in recommendation relevance for a dataset of 5000+ movies .Optimized data preprocessing pipelines with NumPy and pandas, cutting down processing time for a large movie dataset .Designed and deployed a responsive web application using Streamlit, achieving a 95% user satisfaction rate based on feedback from 100+ beta tester",
+    image: "/projects/movie reccomender.png", // replace with your project image path
+    link:"https://moviereccomender.streamlit.app",
+    github:"https://github.com/akshatshahh/movie-recommender-microsoft", 
+    tags: [TAGS.PYTHON, TAGS.STREAMLIT], // add tags if needed "Streamlit", "Pillow", "HEIF"
   },
 ]
 ---
@@ -121,14 +140,14 @@ const PROJECTS = [
       <div class="mt-2 text-gray-700 dark:text-gray-400">{description}</div>
       <footer class="flex items-end justify-start mt-4 gap-x-4">
           {github && (
-            <LinkButton href={github}>
+            <LinkButton href={github} target="_blank" rel="noopener noreferrer">
               <GitHub class="size-6" />
               Code
               
             </LinkButton>
           )}
           {link && (
-            <LinkButton href={link}>
+            <LinkButton href={link} target="_blank" rel="noopener noreferrer">
               <Link class="size-4" />
               Preview
             </LinkButton>
