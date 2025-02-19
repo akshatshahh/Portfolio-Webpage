@@ -1,6 +1,18 @@
 ---
  const personalImageAlt = "Akshat Shah"
 ---
+---
+const trackingId = "G-4V7C4PDYQC";
+---
+<head>
+  <script async src={`https://www.googletagmanager.com/gtag/js?id=${trackingId}`} set:html></script>
+  <script set:html>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '{trackingId}');
+  </script>
+</head>
 
 <article class="flex flex-col items-center justify-center gap-8 text-gray-700 dark:text-gray-300 md:flex-row">
   <div
