@@ -1,49 +1,38 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro"
 const EXPERIENCIE = [
-  // {
-  //   date: "Septiembre 2022",
-  //   title: "Principal Frontend Engineer",
-  //   company: "Adevinta Spain",
-  //   description:
-  //     "Responsable de la plataforma, componentes y utilidades para la creación y desarrollo de aplicaciones web. Mejora de un 30% en la entrega de software. Implantación de medidas de integración continua y despliegue con A/B testing en más de 15 equipos.",
-  // },
-
-{
-  title: "Teaching Assistant",
-  company: "USC Viterbi K-12 STEM Center",
-  description: "Supported Dr. Darin Gray in delivering the “Discover Engineering” course—a four-week, 3-unit program introducing high school students to various engineering disciplines—by collaborating on lectures and hands-on projects, and designed comprehensive instructional materials including class presentations, detailed notes, weekly overviews, and structured activity plans to ensure alignment with the course’s interdisciplinary objectives.",
-  date: "Apr 2025 - Present"
-},
-{
-  title: "Research Assistant",
-  company: "Integrated Media Systems Center (IMSC) @ USC",
-  description: "Collaborated on the design and implementation of an interactive “POI Game” crowdsourced data collection platform to gather labeled training data for machine learning models by presenting users with timestamped latitude/longitude points and prompting them to identify the most likely visited point of interest; and worked under the guidance of Dr. John Krumm, engaging in interdisciplinary discussions to align technical developments in location data privacy and mobility analysis with real-world applications.",
-  date: "Mar 2025 - Present"
-},
-{
-  title: "Student Worker",
-  company: "USC Auxiliary Services",
-  description: "Assisted hundreds of students, faculty, and visitors at the USC Bookstore by providing tailored product recommendations that enhanced their experience through attentive and efficient service; served as a front-line greeter during peak hours, managing store flow and offering first-touch support to both new and returning customers; and handled invoicing and point-of-sale operations with accuracy and strong multitasking skills in a fast-paced retail environment.",
-  date: "Dec 2024 - Mar 2025"
-},
-{
+  {
+    title: "Teaching Assistant",
+    company: "USC Viterbi K-12 STEM Center",
+    description: "Supported Dr. Darin Gray in delivering the “Discover Engineering” course—a four-week, 3-unit program introducing high school students to various engineering disciplines—by collaborating on lectures and hands-on projects, and designed comprehensive instructional materials including class presentations, detailed notes, weekly overviews, and structured activity plans to ensure alignment with the course’s interdisciplinary objectives.",
+    date: "Apr 2025 - Present"
+  },
+  {
+    title: "Research Assistant",
+    company: "Integrated Media Systems Center (IMSC) @ USC",
+    description: "Collaborated on the design and implementation of an interactive “POI Game” crowdsourced data collection platform to gather labeled training data for machine learning models by presenting users with timestamped latitude/longitude points and prompting them to identify the most likely visited point of interest; and worked under the guidance of Dr. John Krumm, engaging in interdisciplinary discussions to align technical developments in location data privacy and mobility analysis with real-world applications.",
+    date: "Mar 2025 - Present"
+  },
+  {
+    title: "Student Worker",
+    company: "USC Auxiliary Services",
+    description: "Assisted hundreds of students, faculty, and visitors at the USC Bookstore by providing tailored product recommendations that enhanced their experience through attentive and efficient service; served as a front-line greeter during peak hours, managing store flow and offering first-touch support to both new and returning customers; and handled invoicing and point-of-sale operations with accuracy and strong multitasking skills in a fast-paced retail environment.",
+    date: "Dec 2024 - Mar 2025"
+  },
+  {
     date: "June 2023 - July 2023",
     title: "Software Engineer Intern",
     company: "Microsoft Corporation , Hyderabad, India",
     description:
-      "During my internship at Microsoft, I contributed to the ODSP (OneDrive and SharePoint) team, focusing on enhancing operational efficiency and monitoring systems. A key achievement was the development of interactive dashboards to track the online performance of Microsoft’s products. These dashboards provided real-time insights, empowering the team to make informed decisions and address performance bottlenecks effectively.I also spearheaded the creation of a Power Automate tool that generated automated alerts whenever key processes, such as loaders, exceeded their expected execution times. This tool streamlined incident response, minimized delays, and optimized system reliability.By leveraging technologies in data visualization and workflow automation, I improved existing workflows and contributed to maintaining high standards of product performance. This experience honed my skills in data-driven problem solving, process optimization, and collaborating in a dynamic, technology-driven environment.",
+      "During my internship at Microsoft, I contributed to the ODSP (OneDrive and SharePoint) team, focusing on enhancing operational efficiency and monitoring systems. A key achievement was the development of interactive dashboards to track the online performance of Microsoft’s products. These dashboards provided real-time insights, empowering the team to make informed decisions and address performance bottlenecks effectively.I also spearheaded the creation of a Power Automate tool that generated automated alerts whenever key processes, such as loaders, exceeded their expected execution times. This tool streamlined incident response, minimized delays, and optimized system reliability.By leveraging technologies in data visualization and workflow automation, I improved existing workflows and contributed to maintaining high standards of product performance. This experience honed my skills in data-driven problem solving, process optimization, and collaborating in a dynamic, technology-driven environment."
   }
 ]
 ---
 
-
-<ol class="relative mt-16">
+<ol class="relative mt-16 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-px md:before:bg-white/15">
   {
-    EXPERIENCIE.map((experiencie) => (
-      <li class="">
-        <ExperienceItem {...experiencie} />
-      </li>
+    EXPERIENCIE.map((experiencie, index) => (
+      <ExperienceItem {...experiencie} side={index % 2 === 0 ? 'left' : 'right'} />
     ))
   }
 </ol>
