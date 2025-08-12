@@ -73,6 +73,26 @@ const TAGS = {
 }
 const PROJECTS = [
   {
+    title: "Artist Search App",
+    description:
+      "Created as part of USC's CSCI 570 Web Technologies course, this app integrates the Spotify API with a Node.js and React stack to let users search for musicians, explore albums, and preview top tracks in the browser.",
+    link: "https://artist-search-app.wl.r.appspot.com/",
+    tags: [TAGS.NODE, TAGS.REACT, TAGS.TAILWIND],
+  },
+  {
+    title: "Predictive Maintenance Research",
+    description:
+      "Investigated LSTM-based models in Python and TensorFlow to forecast equipment failures using industrial IoT sensor data, demonstrating how predictive maintenance can reduce simulated downtime by 15%.",
+    tags: [TAGS.PYTHON, TAGS.TENSORFLOW],
+  },
+  {
+    title: "Splitwiser",
+    description:
+      "An open-source alternative to Splitwise that manages shared expenses, built with Next.js, Node.js, and Tailwind CSS to track balances, create groups, and settle debts effortlessly.",
+    github: "https://github.com/akshatshahh/splitwiser",
+    tags: [TAGS.NEXT, TAGS.NODE, TAGS.TAILWIND],
+  },
+  {
     title: "Brief Bytes",
     description:
       "Designed and developed Brief Bytes, an innovative web platform using Svelte, JavaScript, Node.js, and PocketBase, aimed at simplifying news consumption for time-constrained users. The platform employs web scraping techniques to gather articles and machine learning for summarization, delivering concise yet informative summaries while offering the option to access full articles. Enhanced usability through intuitive UI/UX design and implemented a scalable backend to ensure seamless content delivery. This project empowered users with actionable insights, driving increased engagement and fostering an efficient news consumption experience.",
@@ -103,7 +123,7 @@ const PROJECTS = [
       "Engineered a content-based movie recommender system with TF-IDF vectorization and cosine similarity algorithms, attaining a 30% improvement in recommendation relevance for a dataset of 5000+ movies .Optimized data preprocessing pipelines with NumPy and pandas, cutting down processing time for a large movie dataset .Designed and deployed a responsive web application using Streamlit, achieving a 95% user satisfaction rate based on feedback from 100+ beta tester",
     image: "/projects/movie reccomender.png", // replace with your project image path
     link:"https://moviereccomender.streamlit.app",
-    github:"https://github.com/akshatshahh/movie-recommender-microsoft", 
+    github:"https://github.com/akshatshahh/movie-recommender-microsoft",
     tags: [TAGS.PYTHON, TAGS.STREAMLIT], // add tags if needed "Streamlit", "Pillow", "HEIF"
   },
 ]
@@ -115,7 +135,18 @@ const PROJECTS = [
     <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
   <div class="w-full md:w-1/2">
     <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
-      <img alt="Image for the project's preview" class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105" loading="lazy" src={image} />
+      {image ? (
+        <img
+          alt="Image for the project's preview"
+          class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+          loading="lazy"
+          src={image}
+        />
+      ) : (
+        <div class="flex items-center justify-center w-full h-56 bg-gray-200 dark:bg-gray-800 sm:h-full">
+          <span class="text-sm text-gray-500 dark:text-gray-400">Image coming soon</span>
+        </div>
+      )}
     </div>
   </div>
 
