@@ -41,7 +41,7 @@ Other: Firebase, PocketBase, Streamlit, Power Automate, Data Visualization
 INTERESTS: Mobile apps, web platforms, ML-driven projects, DeFi/crypto, food content creation (thegajabfoodie on Instagram).`;
 
 const GEMINI_API_URL =
-  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent";
+  "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
 interface GeminiMessage {
   role: "user" | "model";
@@ -125,7 +125,10 @@ export async function handler(event: {
       console.error("Gemini API error:", response.status, errText);
       return {
         statusCode: 502,
-        body: JSON.stringify({ error: "AI service temporarily unavailable" }),
+        body: JSON.stringify({
+          error: "AI service temporarily unavailable. Please try again shortly.",
+          debug: `${response.status}: ${errText.slice(0, 200)}`,
+        }),
       };
     }
 
