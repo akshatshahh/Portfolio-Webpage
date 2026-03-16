@@ -17,7 +17,7 @@ GitHub: github.com/akshatshahh
 Location: Los Angeles, CA (USC grad student)
 
 EDUCATION:
-- MS in Computer Science, USC Viterbi School of Engineering (2024-2026), GPA: 3.55. Courses: DSA, Database, Applied NLP, Web Technologies.
+- MS in Computer Science, USC Viterbi School of Engineering (2024-2026), GPA: 3.55. Courses: DSA, Database, Applied NLP, Web Technologies, Advanced Mobile Devices and Game Consoles, Software Architectures, Applied Cryptography, Information Retrieval and Web Search Engines.
 - BTech in CSE, Indus University, Ahmedabad (2020-2024), GPA: 3.86. Courses: DSA, ML, Web Dev, Operating Systems.
 
 EXPERIENCE:
@@ -27,6 +27,7 @@ EXPERIENCE:
 - Software Engineer Intern, Microsoft Corporation, Hyderabad (June-July 2023): ODSP team (OneDrive & SharePoint). Built interactive dashboards for product performance monitoring. Created Power Automate automated alerts for process monitoring.
 
 PROJECTS:
+- Chase (Unity WebGL Game): Interactive browser-playable game built with Unity as a team of 5 for USC's CSCI 526 Advanced Mobile Devices and Game Consoles course. Features real-time gameplay mechanics, physics-based interactions, enemy AI, and dynamic level design.
 - Splitwiser: Open-source Splitwise alternative for shared expenses (Next.js, Node.js, Tailwind CSS). Track balances, create groups, settle debts.
 - Predictive Maintenance Research: LSTM-based models for equipment failure prediction from IoT sensor data (Python, TensorFlow). Reduced simulated downtime by 15%.
 - Artist Search App: Spotify API integration for musician/album search (Node.js, React, Tailwind CSS). Built for USC CSCI 570 Web Technologies course.

@@ -13,6 +13,7 @@ import Node from "./icons/Node.astro"
 import REACT from "./icons/ReactJS.astro"
 import Javascript from "./icons/Javascript.astro"
 import Svelte from "./icons/Svelte.astro"
+import Unity from "./icons/Unity.astro"
 
 const TAGS = {
   NEXT: {
@@ -70,8 +71,21 @@ const TAGS = {
     class: "bg-[#68A063] text-white",
     icon: Node,
   },
+  UNITY: {
+    name: "Unity",
+    class: "bg-[#222C37] text-white",
+    icon: Unity,
+  },
 }
 const PROJECTS = [
+  {
+    title: "Chase - Unity WebGL Game",
+    description:
+      "Developed as a team of 5 for USC's CSCI 526 Advanced Mobile Devices and Game Consoles course, Chase is an interactive Unity WebGL game featuring real-time gameplay mechanics, physics-based interactions, and dynamic level design. The team collaborated on game architecture, player controls, enemy AI behavior, and UI systems, delivering a polished browser-playable experience optimized for performance across devices.",
+    link: "https://davidzhang0710.github.io/CS526/Gold/index.html",
+    image: "https://via.placeholder.com/600x400?text=Chase+Game",
+    tags: [TAGS.UNITY, TAGS.Javascript],
+  },
   {
     title: "Splitwiser",
     description:
