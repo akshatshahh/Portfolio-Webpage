@@ -17,11 +17,11 @@ GitHub: github.com/akshatshahh
 Location: Los Angeles, CA (USC grad student)
 
 EDUCATION:
-- MS in Computer Science, USC Viterbi School of Engineering (2024-2026), GPA: 3.50. Courses: DSA, Database, Applied NLP, Web Technologies.
+- MS in Computer Science, USC Viterbi School of Engineering (2024-2026), GPA: 3.55. Courses: DSA, Database, Applied NLP, Web Technologies.
 - BTech in CSE, Indus University, Ahmedabad (2020-2024), GPA: 3.86. Courses: DSA, ML, Web Dev, Operating Systems.
 
 EXPERIENCE:
-- Teaching Assistant, USC Viterbi K-12 STEM Center (Apr 2025-Present): Teaching "Discover Engineering" course for high school students under Dr. Darin Gray.
+- Lead Teaching Assistant, USC Viterbi K-12 STEM Center (Apr 2025-July 2025): Teaching "Discover Engineering" course for high school students under Dr. Darin Gray.
 - Research Assistant, IMSC @ USC (Mar 2025-Present): Building "POI Game" crowdsourced ML data collection platform under Dr. John Krumm for location data privacy and mobility analysis.
 - Student Worker, USC Auxiliary Services (Dec 2024-Mar 2025): USC Bookstore operations, customer service, invoicing, POS.
 - Software Engineer Intern, Microsoft Corporation, Hyderabad (June-July 2023): ODSP team (OneDrive & SharePoint). Built interactive dashboards for product performance monitoring. Created Power Automate automated alerts for process monitoring.
