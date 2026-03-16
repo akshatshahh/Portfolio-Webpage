@@ -28,8 +28,7 @@ EXPERIENCE:
 
 PROJECTS:
 - Chase (Unity WebGL Game): Interactive browser-playable game built with Unity as a team of 5 for USC's CSCI 526 Advanced Mobile Devices and Game Consoles course. Features real-time gameplay mechanics, physics-based interactions, enemy AI, and dynamic level design.
-- Splitwiser: Open-source Splitwise alternative for shared expenses (Next.js, Node.js, Tailwind CSS). Track balances, create groups, settle debts.
-- Predictive Maintenance Research: LSTM-based models for equipment failure prediction from IoT sensor data (Python, TensorFlow). Reduced simulated downtime by 15%.
+- Multilingual Self-Debugging Framework: Built a multilingual self-debugging framework for Python and JavaScript using LLMs (StarCoder), inspired by the LDB paradigm. Used static Control Flow Graph (CFG) analysis and dynamic execution tracing for block-wise iterative debugging. Improved accuracy by 7% over baseline prompting using MBPP and MdEval datasets.
 - Artist Search App: Spotify API integration for musician/album search (Node.js, React, Tailwind CSS). Built for USC CSCI 570 Web Technologies course.
 - Brief Bytes: News summarization platform using web scraping and ML (Svelte, JavaScript, Node.js, PocketBase, TensorFlow).
 - Scholarship Finder: Web scraping with BeautifulSoup + ML matching with scikit-learn (Python, Streamlit). Improved search accuracy by 40%.
