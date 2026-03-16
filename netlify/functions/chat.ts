@@ -17,8 +17,8 @@ GitHub: github.com/akshatshahh
 Location: Los Angeles, CA (USC grad student)
 
 EDUCATION:
-- MS in Computer Science, USC Viterbi School of Engineering (2024-2026), GPA: 3.55. Courses: DSA, Database, Applied NLP, Web Technologies, Advanced Mobile Devices and Game Consoles, Software Architectures, Applied Cryptography, Information Retrieval and Web Search Engines.
-- BTech in CSE, Indus University, Ahmedabad (2020-2024), GPA: 3.86. Courses: DSA, ML, Web Dev, Operating Systems.
+- MS in Computer Science, USC Viterbi School of Engineering (2024-2026), GPA: 3.55. Courses: Analysis of Algorithms, Database Systems, Applied NLP, Web Technologies, Advanced Mobile Devices and Game Consoles, Software Architectures, Applied Cryptography, Information Retrieval and Web Search Engines.
+- BTech in CSE, Indus University, Ahmedabad (2020-2024), GPA: 3.86. Courses: Data Structures, Algorithms, ML, Web Dev, Operating Systems, and more.
 
 EXPERIENCE:
 - Lead Teaching Assistant, USC Viterbi K-12 STEM Center (Apr 2025-July 2025): Teaching "Discover Engineering" course for high school students under Dr. Darin Gray.
