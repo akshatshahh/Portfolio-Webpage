@@ -1,0 +1,305 @@
+---
+import ChatIcon from "@/components/icons/ChatIcon.astro"
+---
+
+<!-- CTA Button -->
+<button
+  id="chat-cta"
+  aria-label="Open chat to learn about Akshat"
+  class="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-yellow-500 px-5 py-3 font-semibold text-gray-900 shadow-lg transition-all duration-300 hover:bg-yellow-400 hover:shadow-xl hover:scale-105 animate-subtle-pulse cursor-pointer"
+>
+  <ChatIcon class="size-5" />
+  <span class="hidden sm:inline">How can Akshat help your team?</span>
+  <span class="sm:hidden">Ask about Akshat</span>
+</button>
+
+<!-- Chat Window -->
+<div
+  id="chat-window"
+  class="fixed bottom-6 right-6 z-50 flex flex-col w-[calc(100vw-3rem)] sm:w-[400px] h-[500px] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-hidden translate-y-4 opacity-0 pointer-events-none transition-all duration-300"
+>
+  <!-- Header -->
+  <div class="flex items-center justify-between px-4 py-3 bg-yellow-500 text-gray-900">
+    <div class="flex items-center gap-2">
+      <ChatIcon class="size-5" />
+      <span class="font-semibold text-sm">Ask me about Akshat</span>
+    </div>
+    <div class="flex items-center gap-3">
+      <span id="msg-counter" class="text-xs font-medium opacity-80"></span>
+      <button id="close-chat" aria-label="Close chat" class="p-1 rounded-full hover:bg-yellow-600/20 transition-colors cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="size-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 6L6 18"></path><path d="M6 6l12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages -->
+  <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+    <!-- Welcome message -->
+    <div class="flex justify-start">
+      <div class="max-w-[80%] rounded-2xl rounded-tl-sm px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200">
+        Hi! I'm Akshat's AI assistant. Ask me anything about his experience, skills, projects, or education.
+      </div>
+    </div>
+    <!-- Starter prompts -->
+    <div id="starter-prompts" class="flex flex-col gap-2 mt-2">
+      <button class="starter-btn text-left text-sm px-3 py-2 rounded-xl border border-yellow-500/30 text-yellow-700 dark:text-yellow-300 hover:bg-yellow-500/10 transition-colors cursor-pointer">
+        What experience does Akshat bring?
+      </button>
+      <button class="starter-btn text-left text-sm px-3 py-2 rounded-xl border border-yellow-500/30 text-yellow-700 dark:text-yellow-300 hover:bg-yellow-500/10 transition-colors cursor-pointer">
+        What projects has Akshat built?
+      </button>
+      <button class="starter-btn text-left text-sm px-3 py-2 rounded-xl border border-yellow-500/30 text-yellow-700 dark:text-yellow-300 hover:bg-yellow-500/10 transition-colors cursor-pointer">
+        How can Akshat help my team?
+      </button>
+    </div>
+  </div>
+
+  <!-- Input -->
+  <div class="border-t border-gray-200 dark:border-gray-700 p-3">
+    <form id="chat-form" class="flex gap-2">
+      <input
+        id="chat-input"
+        type="text"
+        placeholder="Ask about Akshat..."
+        maxlength="300"
+        autocomplete="off"
+        class="flex-1 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-800 px-4 py-2 text-sm text-gray-800 dark:text-gray-200 placeholder-gray-400 dark:placeholder-gray-500 outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500 transition-colors"
+      />
+      <button
+        id="send-btn"
+        type="submit"
+        aria-label="Send message"
+        class="rounded-xl bg-yellow-500 px-4 py-2 text-gray-900 font-medium text-sm hover:bg-yellow-400 transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+      >
+        Send
+      </button>
+    </form>
+  </div>
+</div>
+
+<style>
+  @keyframes subtle-pulse {
+    0%, 100% { box-shadow: 0 4px 14px rgba(234, 179, 8, 0.3); }
+    50% { box-shadow: 0 4px 20px rgba(234, 179, 8, 0.5); }
+  }
+  .animate-subtle-pulse {
+    animation: subtle-pulse 3s ease-in-out infinite;
+  }
+</style>
+
+<script>
+  const MAX_MESSAGES = 15;
+  const COOLDOWN_MS = 3000;
+  const CACHE_PREFIX = "akshat-chat-cache-";
+
+  let isOpen = false;
+  let messageCount = 0;
+  let lastSendTime = 0;
+  let conversationHistory: { role: string; parts: { text: string }[] }[] = [];
+
+  const cta = document.getElementById("chat-cta") as HTMLButtonElement;
+  const chatWindow = document.getElementById("chat-window") as HTMLDivElement;
+  const closeBtn = document.getElementById("close-chat") as HTMLButtonElement;
+  const chatMessages = document.getElementById("chat-messages") as HTMLDivElement;
+  const chatForm = document.getElementById("chat-form") as HTMLFormElement;
+  const chatInput = document.getElementById("chat-input") as HTMLInputElement;
+  const sendBtn = document.getElementById("send-btn") as HTMLButtonElement;
+  const msgCounter = document.getElementById("msg-counter") as HTMLSpanElement;
+  const starterPrompts = document.getElementById("starter-prompts") as HTMLDivElement;
+
+  function updateCounter() {
+    const remaining = MAX_MESSAGES - messageCount;
+    if (messageCount > 0) {
+      msgCounter.textContent = `${remaining} left`;
+    }
+  }
+
+  function openChat() {
+    isOpen = true;
+    cta.classList.add("opacity-0", "pointer-events-none", "scale-95");
+    chatWindow.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
+    chatInput.focus();
+  }
+
+  function closeChat() {
+    isOpen = false;
+    chatWindow.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
+    cta.classList.remove("opacity-0", "pointer-events-none", "scale-95");
+  }
+
+  function hashString(str: string): string {
+    let hash = 0;
+    const normalized = str.toLowerCase().trim();
+    for (let i = 0; i < normalized.length; i++) {
+      const char = normalized.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash |= 0;
+    }
+    return CACHE_PREFIX + hash.toString(36);
+  }
+
+  function getCached(question: string): string | null {
+    try {
+      return localStorage.getItem(hashString(question));
+    } catch {
+      return null;
+    }
+  }
+
+  function setCache(question: string, answer: string) {
+    try {
+      localStorage.setItem(hashString(question), answer);
+    } catch {
+      // localStorage full or unavailable
+    }
+  }
+
+  function addMessage(text: string, isUser: boolean) {
+    const wrapper = document.createElement("div");
+    wrapper.className = `flex ${isUser ? "justify-end" : "justify-start"}`;
+
+    const bubble = document.createElement("div");
+    bubble.className = isUser
+      ? "max-w-[80%] rounded-2xl rounded-tr-sm px-4 py-2 text-sm bg-yellow-500 text-gray-900"
+      : "max-w-[80%] rounded-2xl rounded-tl-sm px-4 py-2 text-sm bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200";
+    bubble.textContent = text;
+
+    wrapper.appendChild(bubble);
+    chatMessages.appendChild(wrapper);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  }
+
+  function showTyping(): HTMLDivElement {
+    const wrapper = document.createElement("div");
+    wrapper.className = "flex justify-start";
+    wrapper.id = "typing-indicator";
+
+    const bubble = document.createElement("div");
+    bubble.className = "max-w-[80%] rounded-2xl rounded-tl-sm px-4 py-3 bg-gray-100 dark:bg-gray-800 flex gap-1";
+    bubble.innerHTML = `
+      <span class="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style="animation-delay:0ms"></span>
+      <span class="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style="animation-delay:150ms"></span>
+      <span class="w-2 h-2 rounded-full bg-gray-400 dark:bg-gray-500 animate-bounce" style="animation-delay:300ms"></span>
+    `;
+
+    wrapper.appendChild(bubble);
+    chatMessages.appendChild(wrapper);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return wrapper;
+  }
+
+  function removeTyping() {
+    document.getElementById("typing-indicator")?.remove();
+  }
+
+  function setInputEnabled(enabled: boolean) {
+    chatInput.disabled = !enabled;
+    sendBtn.disabled = !enabled;
+  }
+
+  async function sendMessage(text: string) {
+    const trimmed = text.trim();
+    if (!trimmed) return;
+
+    if (trimmed.length < 3) {
+      addMessage("Please type a longer question.", false);
+      return;
+    }
+
+    if (messageCount >= MAX_MESSAGES) {
+      addMessage("You've used all your questions for this session. Refresh the page to start over!", false);
+      setInputEnabled(false);
+      return;
+    }
+
+    const now = Date.now();
+    if (now - lastSendTime < COOLDOWN_MS) {
+      const wait = Math.ceil((COOLDOWN_MS - (now - lastSendTime)) / 1000);
+      addMessage(`Please wait ${wait} second${wait > 1 ? "s" : ""} before sending another message.`, false);
+      return;
+    }
+
+    // Hide starter prompts after first message
+    if (starterPrompts) {
+      starterPrompts.style.display = "none";
+    }
+
+    addMessage(trimmed, true);
+    chatInput.value = "";
+    messageCount++;
+    lastSendTime = Date.now();
+    updateCounter();
+
+    // Check cache
+    const cached = getCached(trimmed);
+    if (cached) {
+      addMessage(cached, false);
+      conversationHistory.push(
+        { role: "user", parts: [{ text: trimmed }] },
+        { role: "model", parts: [{ text: cached }] }
+      );
+      return;
+    }
+
+    setInputEnabled(false);
+    showTyping();
+
+    conversationHistory.push({ role: "user", parts: [{ text: trimmed }] });
+
+    try {
+      const res = await fetch("/.netlify/functions/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ messages: conversationHistory.slice(-6) }),
+      });
+
+      removeTyping();
+
+      if (!res.ok) {
+        const errData = await res.json().catch(() => ({}));
+        const errMsg = errData.error || "Something went wrong. Please try again.";
+        addMessage(errMsg, false);
+        conversationHistory.pop();
+        return;
+      }
+
+      const data = await res.json();
+      const reply = data.reply || "Sorry, I couldn't generate a response.";
+
+      addMessage(reply, false);
+      setCache(trimmed, reply);
+      conversationHistory.push({ role: "model", parts: [{ text: reply }] });
+    } catch {
+      removeTyping();
+      addMessage("Network error. Please check your connection and try again.", false);
+      conversationHistory.pop();
+    } finally {
+      setInputEnabled(true);
+      chatInput.focus();
+    }
+  }
+
+  // Event listeners
+  cta.addEventListener("click", openChat);
+  closeBtn.addEventListener("click", closeChat);
+
+  chatForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    sendMessage(chatInput.value);
+  });
+
+  document.querySelectorAll(".starter-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      sendMessage(btn.textContent || "");
+    });
+  });
+
+  // Close on Escape key
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && isOpen) closeChat();
+  });
+
+  updateCounter();
+</script>
