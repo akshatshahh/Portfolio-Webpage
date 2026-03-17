@@ -29,7 +29,7 @@ EXPERIENCE:
 PROJECTS:
 - Chase (Unity WebGL Game): Interactive browser-playable game built with Unity as a team of 5 for USC's CSCI 526 Advanced Mobile Devices and Game Consoles course. Features real-time gameplay mechanics, physics-based interactions, enemy AI, and dynamic level design.
 - Multilingual Self-Debugging Framework: Built a multilingual self-debugging framework for Python and JavaScript using LLMs (StarCoder), inspired by the LDB paradigm. Used static Control Flow Graph (CFG) analysis and dynamic execution tracing for block-wise iterative debugging. Improved accuracy by 7% over baseline prompting using MBPP and MdEval datasets.
-- Artist Search App: Spotify API integration for musician/album search (Node.js, React, Tailwind CSS). Built for USC CSCI 570 Web Technologies course.
+- Artist Search App: Artsy API integration for searching artists and exploring their artworks/paintings (Node.js, React, Tailwind CSS). Built for USC CSCI 571 Web Technologies course. Deployed on Google Cloud App Engine.
 - Brief Bytes: News summarization platform using web scraping and ML (Svelte, JavaScript, Node.js, PocketBase, TensorFlow).
 - Scholarship Finder: Web scraping with BeautifulSoup + ML matching with scikit-learn (Python, Streamlit). Improved search accuracy by 40%.
 - Movie Recommender System: Content-based recommender using TF-IDF + cosine similarity (Python, Streamlit). 5000+ movies, 95% user satisfaction.
