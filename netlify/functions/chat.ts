@@ -30,7 +30,8 @@ PROJECTS:
 - Chase (Unity WebGL Game): Interactive browser-playable game built with Unity as a team of 5 for USC's CSCI 526 Advanced Mobile Devices and Game Consoles course. Features real-time gameplay mechanics, physics-based interactions, enemy AI, and dynamic level design.
 - Multilingual Self-Debugging Framework: Built a multilingual self-debugging framework for Python and JavaScript using LLMs (StarCoder), inspired by the LDB paradigm. Used static Control Flow Graph (CFG) analysis and dynamic execution tracing for block-wise iterative debugging. Improved accuracy by 7% over baseline prompting using MBPP and MdEval datasets.
 - Artist Search App: Artsy API integration for searching artists and exploring their artworks/paintings (Node.js, React, Tailwind CSS). Built for USC CSCI 571 Web Technologies course. Deployed on Google Cloud App Engine.
-- Brief Bytes: News summarization platform using web scraping and ML (Svelte, JavaScript, Node.js, PocketBase, TensorFlow).
+- Brief Bytes: News summarization platform using web scraping and ML (Svelte, JavaScript, Node.js, PocketBase, TensorFlow). Live preview: https://brief-bytes2.vercel.app. Code: https://github.com/Suthar-Naresh/brief-bytes.
+- Clipboard Manager for macOS: Lightweight native macOS menu bar clipboard manager built with SwiftUI. It silently monitors your clipboard, keeps a searchable history, lets you pin frequently used items, and supports one-click copy with relative timestamps. Code: https://github.com/akshatshahh/ClipboardManager. Download prebuilt artifacts via GitHub Actions: https://github.com/akshatshahh/ClipboardManager/actions.
 - Scholarship Finder: Web scraping with BeautifulSoup + ML matching with scikit-learn (Python, Streamlit). Improved search accuracy by 40%.
 - Movie Recommender System: Content-based recommender using TF-IDF + cosine similarity (Python, Streamlit). 5000+ movies, 95% user satisfaction.
 
