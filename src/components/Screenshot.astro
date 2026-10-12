@@ -1,0 +1,27 @@
+---
+interface Props {
+  src: string
+  alt: string
+  class?: string
+  eager?: boolean
+}
+
+const { src, alt, class: className = "", eager = false } = Astro.props
+---
+
+<figure class={`overflow-hidden rounded-lg border border-gray-200 bg-gray-100 shadow-sm dark:border-white/10 dark:bg-gray-900 ${className}`}>
+  <div class="flex h-6 items-center gap-1.5 border-b border-gray-200 px-3 dark:border-white/10" aria-hidden="true">
+    <span class="size-2 rounded-full bg-gray-300 dark:bg-white/20"></span>
+    <span class="size-2 rounded-full bg-gray-300 dark:bg-white/20"></span>
+    <span class="size-2 rounded-full bg-gray-300 dark:bg-white/20"></span>
+  </div>
+  <img
+    src={src}
+    alt={alt}
+    width="1280"
+    height="800"
+    loading={eager ? "eager" : "lazy"}
+    decoding="async"
+    class="block aspect-[16/10] w-full object-cover object-top"
+  />
+</figure>

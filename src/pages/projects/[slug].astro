@@ -1,9 +1,10 @@
 ---
 import Layout from "@/layouts/Layout.astro"
 import TagList from "@/components/TagList.astro"
-import LinkButton from "@/components/LinkButton.astro"
+import ActionLink from "@/components/ActionLink.astro"
+import Screenshot from "@/components/Screenshot.astro"
 import GitHub from "@/components/icons/GitHub.astro"
-import Link from "@/components/icons/Link.astro"
+import ArrowUpRight from "@/components/icons/ArrowUpRight.astro"
 import { FEATURED_PROJECTS, type FeaturedProject } from "@/data/projects"
 
 export function getStaticPaths() {
@@ -33,22 +34,24 @@ const others = FEATURED_PROJECTS.filter((p) => p.slug !== project.slug)
         <div class="mt-6 flex flex-wrap gap-3">
           {
             project.live && (
-              <LinkButton href={project.live}>
-                <Link class="size-4" />
+              <ActionLink href={project.live} variant="primary">
                 Live demo
-              </LinkButton>
+                <ArrowUpRight class="size-4" />
+              </ActionLink>
             )
           }
           {
             project.github && (
-              <LinkButton href={project.github}>
-                <GitHub class="size-5" />
+              <ActionLink href={project.github} variant={project.live ? "secondary" : "primary"}>
+                <GitHub class="size-4" />
                 Source code
-              </LinkButton>
+              </ActionLink>
             )
           }
         </div>
       </header>
+
+      <Screenshot src={project.image} alt={`Screenshot of ${project.title}`} class="mt-10" eager />
 
       <section class="mt-12">
         <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Overview</h2>

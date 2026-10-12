@@ -12,6 +12,7 @@ export interface FeaturedProject {
   summary: string
   context: string
   period: string
+  image: string
   live?: string
   github?: string
   tags: Tag[]
@@ -29,6 +30,8 @@ export interface Project {
   context?: string
   image?: string
   live?: string
+  /** Label for the live link when "Live demo" is not accurate */
+  liveLabel?: string
   github?: string
   private?: boolean
   tags: Tag[]
@@ -37,6 +40,7 @@ export interface Project {
 export const FEATURED_PROJECTS: FeaturedProject[] = [
   {
     slug: "poi-game",
+    image: "/projects/poi-game.webp",
     title: "POI Game",
     tagline: "A gamified labeling platform that turns GPS visits into ML training data.",
     summary:
@@ -89,6 +93,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
   },
   {
     slug: "local-events",
+    image: "/projects/local-events.webp",
     title: "Local Events",
     tagline: "Find live events near you and reserve a spot with Stripe, without overselling.",
     summary:
@@ -140,6 +145,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
   },
   {
     slug: "offline-interrogator",
+    image: "/projects/offline-interrogator.webp",
     title: "The Offline Interrogator",
     tagline: "A local-first AI mock interviewer running on open-weight Gemma.",
     summary:
@@ -194,6 +200,7 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
 export const MORE_PROJECTS: Project[] = [
   {
     title: "BudgetBoard",
+    image: "/projects/budgetboard.webp",
     description:
       "Personal finance dashboard with portfolio intelligence: import holdings from CSV or Excel, track net worth, budgets and Splitwise-style shared expenses, and get real-time SignalR alerts when news hits stocks you own. ASP.NET Identity with refresh-token rotation, EF Core and a Quartz background job.",
     private: true,
@@ -201,6 +208,7 @@ export const MORE_PROJECTS: Project[] = [
   },
   {
     title: "Secure Decentralized Audit System",
+    image: "/projects/secure-audit-system.webp",
     description:
       "Audit-log system for electronic health records. Records are authenticated with JWT, integrity-tagged with HMAC-SHA256 and committed across three permissioned blockchain nodes by a BFT vote (2 of 3). Runs as a Docker Compose cluster with a design doc mapped to PBFT, Tendermint and HotStuff.",
     context: "USC CSCI 531, team of 2",
@@ -209,6 +217,7 @@ export const MORE_PROJECTS: Project[] = [
   },
   {
     title: "Deep Research Agent",
+    image: "/projects/deep-research-agent.webp",
     description:
       "Research agent that decomposes complex questions into sub-queries and runs a Claude tool-use loop over web search and vector memory, all under a self-enforced $0.05 per-session budget and a 2,000-token context cap per sub-query. Degrades gracefully as the budget runs out.",
     private: true,
@@ -216,6 +225,7 @@ export const MORE_PROJECTS: Project[] = [
   },
   {
     title: "Trail Whisperer",
+    image: "/projects/trail-whisperer.webp",
     description:
       "Offline trail companion: identify birds by sound with BirdNET and plants by photo with local Gemma, then revisit a timeline and lifelist at home. Optional basecamp adds MongoDB Atlas vector search over local embeddings.",
     context: "Hacktoberfest 2026",
@@ -224,6 +234,7 @@ export const MORE_PROJECTS: Project[] = [
   },
   {
     title: "Northeast Corridor vs Fly Decider",
+    image: "/projects/northeast-corridor.webp",
     description:
       "Tells you the smartest way to travel between two US cities (train, fly, drive or bus) with a confidence score and plain-English reasons. Gemini is called from a server-side API route so the key never reaches the client.",
     live: "https://northeast-corridor-vs-fly-decider.vercel.app",
@@ -234,17 +245,19 @@ export const MORE_PROJECTS: Project[] = [
     title: "Clipboard Manager for macOS",
     description:
       "Lightweight native menu bar clipboard manager. It monitors the clipboard, keeps a searchable history and lets you pin frequently used items. Prebuilt app artifacts come from GitHub Actions.",
-    image: "/projects/clipboard-manager.png",
+    image: "/projects/clipboard-manager.webp",
     github: "https://github.com/akshatshahh/ClipboardManager",
     live: "https://github.com/akshatshahh/ClipboardManager/actions",
+    liveLabel: "Download app",
     tags: [TAGS.SWIFT],
   },
   {
     title: "Multilingual Self-Debugging Framework",
     description:
       "LLM self-debugging for Python and JavaScript inspired by LDB. Combines static control flow graph analysis with dynamic execution tracing for block-wise feedback, improving accuracy by 7% over baseline prompting on MBPP and MdEval.",
-    image: "/projects/self-debugging-framework.png",
+    image: "/projects/self-debugging-framework.webp",
     live: "https://drive.google.com/file/d/1nxcaamAEiuMYY_BZTixaCZxWn5AIymnG/view?usp=share_link",
+    liveLabel: "Read the paper",
     tags: [TAGS.PYTHON, TAGS.JAVASCRIPT, TAGS.LLM],
   },
   {
@@ -252,7 +265,7 @@ export const MORE_PROJECTS: Project[] = [
     description:
       "Full stack app on the Artsy API: search artists, explore their artworks and view detailed profiles. Deployed on Google App Engine.",
     context: "USC CSCI 571",
-    image: "/projects/artist-search-app.png",
+    image: "/projects/artist-search-app.webp",
     live: "https://artist-search-app.wl.r.appspot.com/",
     tags: [TAGS.NODE, TAGS.REACT, TAGS.TAILWIND],
   },
@@ -261,8 +274,9 @@ export const MORE_PROJECTS: Project[] = [
     description:
       "Browser-playable Unity WebGL game with physics-based interactions, enemy AI and dynamic level design.",
     context: "USC CSCI 526, team of 5",
-    image: "/projects/chase-game.png",
+    image: "/projects/chase-game.webp",
     live: "https://davidzhang0710.github.io/CS526/Gold/index.html",
+    liveLabel: "Play in browser",
     tags: [TAGS.UNITY],
   },
   {
@@ -270,7 +284,7 @@ export const MORE_PROJECTS: Project[] = [
     description:
       "News platform that scrapes articles and summarizes them with ML, with the option to open the full story.",
     context: "Team project",
-    image: "/projects/briefbytes.png",
+    image: "/projects/briefbytes.webp",
     live: "https://brief-bytes2.vercel.app",
     github: "https://github.com/Suthar-Naresh/brief-bytes",
     tags: [TAGS.SVELTE, TAGS.NODE, TAGS.TAILWIND],
