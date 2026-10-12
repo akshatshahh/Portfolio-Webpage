@@ -1,0 +1,57 @@
+---
+import { MORE_PROJECTS } from "@/data/projects"
+import TagList from "./TagList.astro"
+import GitHub from "./icons/GitHub.astro"
+import Link from "./icons/Link.astro"
+
+const ACCESS_REQUEST = "mailto:akshatshahh2003@gmail.com?subject=Private%20repo%20access%3A%20"
+---
+
+<div class="grid gap-6 md:grid-cols-2">
+  {
+    MORE_PROJECTS.map((project) => (
+      <article class="flex flex-col overflow-hidden rounded-xl border border-gray-200 bg-white/60 shadow-sm transition hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/60">
+        {project.image && (
+          <img
+            src={project.image}
+            alt={`Screenshot of ${project.title}`}
+            loading="lazy"
+            class="h-40 w-full object-cover object-top"
+          />
+        )}
+        <div class="flex flex-1 flex-col p-5">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">{project.title}</h3>
+            {project.private && (
+              <span class="rounded-full border border-gray-400 px-2 py-0.5 text-xs text-gray-600 dark:border-gray-600 dark:text-gray-400">
+                Private repo
+              </span>
+            )}
+          </div>
+          {project.context && <p class="mt-1 text-xs text-gray-500 dark:text-gray-400">{project.context}</p>}
+          <p class="mt-2 flex-1 text-sm text-gray-700 dark:text-gray-400">{project.description}</p>
+          <div class="mt-4">
+            <TagList tags={project.tags} />
+          </div>
+          <footer class="mt-4 flex flex-wrap gap-4 text-sm font-medium">
+            {project.live && (
+              <a href={project.live} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-yellow-500">
+                <Link class="size-4" /> Preview
+              </a>
+            )}
+            {project.github && (
+              <a href={project.github} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 hover:text-yellow-500">
+                <GitHub class="size-4" /> Code
+              </a>
+            )}
+            {project.private && (
+              <a href={ACCESS_REQUEST + encodeURIComponent(project.title)} class="inline-flex items-center gap-1 hover:text-yellow-500">
+                Request a code walkthrough <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </footer>
+        </div>
+      </article>
+    ))
+  }
+</div>

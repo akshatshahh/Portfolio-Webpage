@@ -1,0 +1,75 @@
+---
+import { getContributions, type OpenSourceData } from "@/lib/openSource"
+import snapshot from "@/data/open-source-snapshot.json"
+
+const { contributions } = await getContributions(snapshot as OpenSourceData)
+
+const merged = contributions.filter((c) => c.state === "merged")
+const inReview = contributions.filter((c) => c.state === "open")
+const projectCount = new Set(contributions.map((c) => c.repo.toLowerCase())).size
+// Merged work first, then most recent.
+const sorted = [...merged, ...inReview].sort((a, b) =>
+  a.state === b.state ? b.date.localeCompare(a.date) : a.state === "merged" ? -1 : 1
+)
+
+const formatStars = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : `${n}`)
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
+
+const STATS = [
+  { value: merged.length, label: "merged PRs" },
+  { value: projectCount, label: "projects" },
+  { value: inReview.length, label: "in review" },
+]
+const ALL_PRS = "https://github.com/search?q=is%3Apr+author%3Aakshatshahh+-user%3Aakshatshahh&type=pullrequests"
+---
+
+<p class="text-gray-700 dark:text-gray-400">
+  I contribute fixes upstream to AI infrastructure, agent frameworks and developer tools. This list is pulled from
+  GitHub every time the site builds.
+</p>
+
+<dl class="mt-6 grid grid-cols-3 gap-4">
+  {
+    STATS.map((s) => (
+      <div class="rounded-xl border border-gray-200 bg-white/60 p-4 text-center dark:border-gray-800 dark:bg-gray-900/60">
+        <dt class="text-sm text-gray-500 dark:text-gray-400">{s.label}</dt>
+        <dd class="text-3xl font-bold text-yellow-500 dark:text-yellow-400">{s.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<ul class="mt-8 grid gap-4 md:grid-cols-2">
+  {
+    sorted.map((c) => (
+      <li class="min-w-0">
+        <a
+          href={c.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex h-full flex-col rounded-xl border border-gray-200 bg-white/60 p-4 transition hover:-translate-y-0.5 hover:border-yellow-400 hover:shadow-lg dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-yellow-400/60"
+        >
+          <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+            <img src={`https://github.com/${c.owner}.png?size=40`} alt="" width="20" height="20" loading="lazy" class="size-5 rounded" />
+            <span class="truncate font-medium">{c.repo}</span>
+            {c.stars !== undefined && <span class="shrink-0">★ {formatStars(c.stars)}</span>}
+          </div>
+          <p class="mt-2 flex-1 font-medium text-gray-800 [overflow-wrap:anywhere] dark:text-gray-100">{c.title}</p>
+          <div class="mt-3 flex items-center justify-between text-xs">
+            {c.state === "merged" ? (
+              <span class="rounded-full bg-purple-600/90 px-2 py-0.5 font-medium text-white">Merged</span>
+            ) : (
+              <span class="rounded-full bg-green-600/90 px-2 py-0.5 font-medium text-white">In review</span>
+            )}
+            <time datetime={c.date} class="text-gray-500 dark:text-gray-400">{formatDate(c.date)}</time>
+          </div>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<a href={ALL_PRS} target="_blank" rel="noopener noreferrer" class="mt-6 inline-block text-sm font-medium hover:text-yellow-500">
+  See every pull request on GitHub →
+</a>

@@ -2,10 +2,10 @@
 import ThemeToggle from "./ThemeToggle.astro"
 
 const navItems = [
-{
-    title: "Education",
-    label: "education",
-    url: "/#education",
+  {
+    title: "Projects",
+    label: "projects",
+    url: "/#projects",
   },
   {
     title: "Experience",
@@ -13,25 +13,27 @@ const navItems = [
     url: "/#experience",
   },
   {
-    title: "Projects",
-    label: "projects",
-    url: "/#projects",
+    title: "Open Source",
+    label: "open-source",
+    url: "/#open-source",
   },
   {
-    title: "About Me",
+    title: "About",
     label: "about-me",
     url: "/#about-me",
+  },
+  {
+    title: "Resume",
+    label: "resume",
+    url: "https://drive.google.com/file/d/1c0uyfFN7FVQz53iAZzfM9mnT2Q4cBfhF/view?usp=sharing",
   },
   {
     title: "Contact",
     label: "contact",
     url: "mailto:akshatshahh2003@gmail.com",
+    // The hero already has a contact button; this keeps the nav on one line on phones.
+    desktopOnly: true,
   },
-  {
-    title: "Resume",
-    label: "Resume",
-    url: "https://drive.google.com/file/d/1c0uyfFN7FVQz53iAZzfM9mnT2Q4cBfhF/view?usp=sharing",
-  }
 ]
 ---
 
@@ -39,12 +41,12 @@ const navItems = [
   class="fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2"
 >
   <nav
-    class="flex px-3 text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
+    class="flex px-1 sm:px-3 text-xs sm:text-sm font-medium rounded-full text-gray-600 dark:text-gray-200 justify-center items-center"
   >
     {
       navItems.map((link) => (
         <a
-          class="relative block px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400"
+          class={`relative ${link.desktopOnly ? "hidden sm:block" : "block"} whitespace-nowrap px-1 sm:px-2 py-2 transition hover:text-yellow-500 dark:hover:text-yellow-400`}
           aria-label={link.label}
           href={link.url}
           rel="noopener noreferrer"

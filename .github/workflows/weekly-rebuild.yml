@@ -1,0 +1,22 @@
+name: Weekly rebuild
+
+# The Open Source section is fetched from GitHub at build time.
+# Rebuilding weekly keeps it current without a manual deploy.
+on:
+  schedule:
+    - cron: "17 14 * * 1"
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Netlify build hook
+        env:
+          HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "NETLIFY_BUILD_HOOK secret is not set; skipping."
+            exit 0
+          fi
+          curl -fsS -X POST -d '{}' "$HOOK"

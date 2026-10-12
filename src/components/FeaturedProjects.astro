@@ -1,0 +1,57 @@
+---
+import { FEATURED_PROJECTS } from "@/data/projects"
+import TagList from "./TagList.astro"
+import LinkButton from "./LinkButton.astro"
+import GitHub from "./icons/GitHub.astro"
+import Link from "./icons/Link.astro"
+---
+
+<div class="flex flex-col gap-y-10">
+  {
+    FEATURED_PROJECTS.map((project) => (
+      <article class="group relative rounded-xl border border-gray-200 bg-white/60 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl dark:border-gray-800 dark:bg-gray-900/60 dark:hover:border-gray-700">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            <a href={`/projects/${project.slug}`} class="hover:text-yellow-500 dark:hover:text-yellow-400">
+              {project.title}
+            </a>
+          </h3>
+          <span class="text-sm text-gray-500 dark:text-gray-400">{project.period}</span>
+        </div>
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{project.context}</p>
+        <p class="mt-3 text-lg text-gray-700 dark:text-gray-300">{project.tagline}</p>
+        <div class="mt-4">
+          <TagList tags={project.tags} />
+        </div>
+        <ul class="mt-4 space-y-2 text-gray-700 dark:text-gray-400">
+          {project.highlights.map((h) => (
+            <li class="flex gap-2">
+              <span class="mt-2 size-1.5 shrink-0 rounded-full bg-yellow-400" />
+              <span>{h}</span>
+            </li>
+          ))}
+        </ul>
+        <footer class="mt-6 flex flex-wrap items-center gap-3">
+          <a
+            href={`/projects/${project.slug}`}
+            class="inline-flex items-center gap-1 rounded-xl bg-yellow-400 px-3 py-2 font-medium text-black transition hover:bg-yellow-300"
+          >
+            Read the case study <span aria-hidden="true">→</span>
+          </a>
+          {project.live && (
+            <LinkButton href={project.live}>
+              <Link class="size-4" />
+              Live
+            </LinkButton>
+          )}
+          {project.github && (
+            <LinkButton href={project.github}>
+              <GitHub class="size-5" />
+              Code
+            </LinkButton>
+          )}
+        </footer>
+      </article>
+    ))
+  }
+</div>

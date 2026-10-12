@@ -5,7 +5,6 @@ import LinkedInIcon from "@/components/icons/LinkedIn.astro"
 import MailIcon from "@/components/icons/Mail.astro"
 import GithubIcon from "@/components/icons/GitHub.astro"
 import SocialPill from "@/components/SocialPill.astro"
-//import InstagramIcon from "@/components/icons/Instagram.astro"
 ---
 
 <div class="max-w-xl">
@@ -21,7 +20,7 @@ import SocialPill from "@/components/SocialPill.astro"
       rel="noopener"
       class="flex items-center transition md:justify-center md:hover:scale-105"
     >
-      <Badge>Computer Science Student</Badge>
+      <Badge>Open to work · Will relocate</Badge>
     </a>
   </div>
   <h1
@@ -29,13 +28,17 @@ import SocialPill from "@/components/SocialPill.astro"
   >
   Hey, I'm Akshat Shah
   </h1>
+  <p class="mt-3 text-lg font-medium text-gray-600 dark:text-gray-400">
+    Software Engineer · MS CS, University of Southern California (May 2026)
+  </p>
   <p
     class="mt-6 text-xl text-gray-800 dark:[&>strong]:text-yellow-200 [&>strong]:text-yellow-500 [&>strong]:font-semibold dark:text-gray-300"
   >
-  Aspiring <strong
-      >Software Engineer</strong
-    > Crafting scalable solutions with React, Node.js, and Django.
-    Passionate about data-driven problem solving and building user-centric applications. Proficient in Python, Java, and modern web technologies. Eager to contribute to innovative projects in software development.  </p>
+    I build <strong>full stack and backend systems</strong>: FastAPI and Node services, React frontends,
+    Postgres, and LLM-powered tools that run locally. I'm a Software Engineer at USC IMSC and contribute fixes
+    upstream to open source projects like <strong>Microsoft PyRIT</strong> and <strong>LiteLLM</strong>.
+    Looking for Software Engineer, Backend and Full Stack roles.
+  </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="mailto:akshatshahh2003@gmail.com">
       <MailIcon class="size-4" />
@@ -49,9 +52,8 @@ import SocialPill from "@/components/SocialPill.astro"
       <GithubIcon class="size-4" />
       GitHub
     </SocialPill>
-    <!-- <SocialPill href="https://instagram.com/thegajabfoodie">
-      <InstagramIcon class="size-4" />
-      Instagram
-    </SocialPill> -->
+    <SocialPill href="https://drive.google.com/file/d/1c0uyfFN7FVQz53iAZzfM9mnT2Q4cBfhF/view?usp=sharing">
+      Resume
+    </SocialPill>
   </nav>
 </div>

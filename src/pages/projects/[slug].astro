@@ -1,0 +1,127 @@
+---
+import Layout from "@/layouts/Layout.astro"
+import TagList from "@/components/TagList.astro"
+import LinkButton from "@/components/LinkButton.astro"
+import GitHub from "@/components/icons/GitHub.astro"
+import Link from "@/components/icons/Link.astro"
+import { FEATURED_PROJECTS, type FeaturedProject } from "@/data/projects"
+
+export function getStaticPaths() {
+  return FEATURED_PROJECTS.map((project) => ({ params: { slug: project.slug }, props: { project } }))
+}
+
+interface Props {
+  project: FeaturedProject
+}
+
+const { project } = Astro.props
+const others = FEATURED_PROJECTS.filter((p) => p.slug !== project.slug)
+---
+
+<Layout title={`${project.title} · Akshat Shah`} description={project.tagline}>
+  <main class="px-4 py-28">
+    <article class="container mx-auto md:max-w-2xl lg:max-w-3xl">
+      <a href="/#projects" class="text-sm text-gray-500 hover:text-yellow-500 dark:text-gray-400">← All projects</a>
+
+      <header class="mt-6">
+        <p class="text-sm text-gray-500 dark:text-gray-400">{project.context} · {project.period}</p>
+        <h1 class="mt-2 text-4xl font-bold tracking-tight text-gray-800 dark:text-white">{project.title}</h1>
+        <p class="mt-4 text-xl text-gray-700 dark:text-gray-300">{project.tagline}</p>
+        <div class="mt-6">
+          <TagList tags={project.tags} />
+        </div>
+        <div class="mt-6 flex flex-wrap gap-3">
+          {
+            project.live && (
+              <LinkButton href={project.live}>
+                <Link class="size-4" />
+                Live demo
+              </LinkButton>
+            )
+          }
+          {
+            project.github && (
+              <LinkButton href={project.github}>
+                <GitHub class="size-5" />
+                Source code
+              </LinkButton>
+            )
+          }
+        </div>
+      </header>
+
+      <section class="mt-12">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Overview</h2>
+        <p class="mt-3 text-gray-700 dark:text-gray-300">{project.summary}</p>
+      </section>
+
+      <section class="mt-10">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">The problem</h2>
+        <p class="mt-3 text-gray-700 dark:text-gray-300">{project.problem}</p>
+      </section>
+
+      <section class="mt-10">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Architecture</h2>
+        <ol class="mt-4 flex flex-col items-stretch">
+          {
+            project.architecture.map((layer, i) => (
+              <li class="flex flex-col items-center">
+                {i > 0 && <span aria-hidden="true" class="h-5 w-px bg-yellow-400" />}
+                <span class="w-full rounded-lg border border-gray-300 bg-white/70 px-4 py-3 text-center font-mono text-sm text-gray-800 dark:border-gray-700 dark:bg-gray-900/70 dark:text-gray-200">
+                  {layer}
+                </span>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="mt-10">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Key engineering decisions</h2>
+        <div class="mt-4 grid gap-4 md:grid-cols-2">
+          {
+            project.decisions.map((d) => (
+              <div class="rounded-xl border border-gray-200 bg-white/60 p-4 dark:border-gray-800 dark:bg-gray-900/60">
+                <h3 class="font-semibold text-yellow-600 dark:text-yellow-400">{d.title}</h3>
+                <p class="mt-2 text-sm text-gray-700 dark:text-gray-400">{d.body}</p>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="mt-10">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">Results</h2>
+        <ul class="mt-3 list-disc space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+          {project.outcomes.map((o) => <li>{o}</li>)}
+        </ul>
+      </section>
+
+      <section class="mt-10">
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">What I would do next</h2>
+        <ul class="mt-3 list-disc space-y-2 pl-5 text-gray-700 dark:text-gray-300">
+          {project.next.map((n) => <li>{n}</li>)}
+        </ul>
+      </section>
+
+      <nav class="mt-16 border-t border-gray-200 pt-8 dark:border-gray-800">
+        <h2 class="text-sm uppercase tracking-wide text-gray-500 dark:text-gray-400">More case studies</h2>
+        <ul class="mt-4 grid gap-4 md:grid-cols-2">
+          {
+            others.map((p) => (
+              <li>
+                <a
+                  href={`/projects/${p.slug}`}
+                  class="block rounded-xl border border-gray-200 p-4 transition hover:border-yellow-400 dark:border-gray-800"
+                >
+                  <span class="font-semibold text-gray-800 dark:text-gray-100">{p.title}</span>
+                  <span class="mt-1 block text-sm text-gray-600 dark:text-gray-400">{p.tagline}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </article>
+  </main>
+</Layout>
