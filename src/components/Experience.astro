@@ -2,10 +2,17 @@
 import ExperienceItem from "./ExperienceItem.astro"
 const EXPERIENCIE = [
   {
-    title: "Software Engineer",
     company: "Integrated Media Systems Center (IMSC) @ USC",
-    date: "Mar 2025 - Present",
-    note: "Research Assistant, Mar 2025 - May 2026. Software Engineer since July 2026.",
+    roles: [
+      { title: "Software Engineer", type: "Full-time", start: "2026-08" },
+      {
+        title: "Graduate Research Assistant",
+        type: "Part-time",
+        start: "2025-03",
+        end: "2026-08",
+        summary: "Built the POI Game, a crowdsourced web platform that generates labeled training data for ML location-attribution models.",
+      },
+    ],
     points: [
       "Design and deploy async Python FastAPI microservices powering a real-time geospatial platform for 500+ daily active users, cutting average endpoint latency by 35% over a synchronous baseline",
       "Integrate Google OAuth 2.0 and JWT authentication across the microservices with structured error handling, securing every REST endpoint with zero reported authentication failures",
@@ -13,17 +20,15 @@ const EXPERIENCIE = [
     ],
   },
   {
-    title: "Lead Teaching Assistant",
     company: "USC Viterbi K-12 STEM Center",
-    date: "Apr 2025 - July 2025",
+    roles: [{ title: "Lead Teaching Assistant", start: "2025-04", end: "2025-07" }],
     points: [
       "Directed a team of 8 teaching assistants delivering a month-long, 3-unit engineering course on algorithms, data structures and software engineering principles to 60+ students, earning a 95% positive feedback rating",
     ],
   },
   {
-    title: "Software Engineer Intern",
     company: "Microsoft, Hyderabad, India",
-    date: "June 2023 - July 2023",
+    roles: [{ title: "Software Engineer Intern", type: "Internship", start: "2023-06", end: "2023-07" }],
     points: [
       "Built KQL and Azure Data Explorer dashboards tracking end-to-end latency for Word, Excel and PowerPoint across browser and Teams surfaces, giving production observability for a platform serving 85M+ monthly active users",
       "Reduced manual performance monitoring overhead by 60% with automated monitoring pipelines in CI/CD that evaluated latency thresholds and flagged regressions across production environments daily",
