@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro"
+
+const PDF = "/Akshat-Shah-Resume.pdf"
+---
+
+<Layout title="Resume · Akshat Shah" description="Resume of Akshat Shah, Software Engineer (MS CS, USC 2026).">
+  <main class="px-4 py-28">
+    <div class="container mx-auto md:max-w-3xl lg:max-w-4xl">
+      <a href="/" class="text-sm text-gray-500 hover:text-yellow-500 dark:text-gray-400">← Back to portfolio</a>
+      <div class="mt-6 flex flex-wrap items-center justify-between gap-4">
+        <h1 class="text-4xl font-bold tracking-tight text-gray-800 dark:text-white">Resume</h1>
+        <a
+          href={PDF}
+          download
+          class="inline-flex items-center gap-2 rounded-xl bg-yellow-400 px-4 py-2 font-medium text-black transition hover:bg-yellow-300"
+        >
+          Download PDF
+        </a>
+      </div>
+      <a href={PDF} target="_blank" rel="noopener noreferrer" class="mt-8 block" aria-label="Open the resume PDF">
+        <img
+          src="/resume-preview.webp"
+          width="1700"
+          height="2200"
+          alt="Resume of Akshat Shah: Software Engineer at USC IMSC, former Software Engineer Intern at Microsoft, MS CS at USC."
+          class="w-full rounded-xl border border-gray-200 bg-white shadow-xl dark:border-gray-800"
+        />
+      </a>
+      <p class="mt-4 text-center text-sm text-gray-500 dark:text-gray-400">
+        Click the page to open the PDF with working links.
+      </p>
+    </div>
+  </main>
+</Layout>

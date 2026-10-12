@@ -18,14 +18,13 @@ Location: Los Angeles, CA. Open to relocation.
 Looking for: Software Engineer, Backend Engineer and Full Stack Engineer roles.
 
 EDUCATION:
-- MS in Computer Science, USC Viterbi School of Engineering (2024 to May 2026, graduated), GPA: 3.55. Courses: Analysis of Algorithms, Database Systems, Software Architectures, Web Technologies, Applied Cryptography, Applied NLP, Information Retrieval and Web Search Engines, Advanced Mobile Devices and Game Consoles.
+- MS in Computer Science, USC Viterbi School of Engineering (Aug 2024 to May 2026, graduated), GPA: 3.66. Courses: Analysis of Algorithms, Database Systems, Software Architectures, Web Technologies, Applied Cryptography, Applied NLP, Information Retrieval and Web Search Engines, Advanced Mobile Devices and Game Consoles.
 - BTech in CSE, Indus University, Ahmedabad (2020-2024), GPA: 3.86.
 
 EXPERIENCE:
-- Software Engineer, IMSC @ USC (July 2026-Present): building software for IMSC's location and mobility research.
-- Research Assistant, IMSC @ USC (Mar 2025-May 2026): built the POI Game under Dr. John Krumm (see projects).
-- Lead Teaching Assistant, USC Viterbi K-12 STEM Center (Apr 2025-July 2025): co-taught "Discover Engineering" for high school students with Dr. Darin Gray.
-- Software Engineer Intern, Microsoft, Hyderabad (June-July 2023): ODSP team (OneDrive & SharePoint). Built interactive dashboards for product performance monitoring and a Power Automate tool for automated alerts on slow processes.
+- Software Engineer, IMSC @ USC (Mar 2025-Present; Research Assistant Mar 2025-May 2026, Software Engineer since July 2026). Designs and deploys async Python FastAPI microservices powering a real-time geospatial platform for 500+ daily active users, cutting average endpoint latency 35% over a synchronous baseline. Integrated Google OAuth 2.0 and JWT authentication across the microservices with structured error handling and zero reported authentication failures. Optimized PostgreSQL 16 PostGIS spatial indexes and H3 geospatial indexing to reduce query latency 40%, supporting 10k+ daily user submissions into partitioned tables without dropped writes. This is the platform behind the POI Game (see projects), built with Dr. John Krumm.
+- Lead Teaching Assistant, USC Viterbi K-12 STEM Center (Apr 2025-July 2025): directed a team of 8 TAs delivering a month-long, 3-unit engineering course (algorithms, data structures, software engineering principles) to 60+ students, with a 95% positive feedback rating.
+- Software Engineer Intern, Microsoft, Hyderabad (June-July 2023): built KQL and Azure Data Explorer dashboards tracking end-to-end latency for Word, Excel and PowerPoint across browser and Teams surfaces, for a platform serving 85M+ monthly active users. Reduced manual performance monitoring overhead 60% with automated monitoring pipelines in CI/CD that flagged latency regressions daily. Delivered 8 dashboards with P50/P75/P95 views, component-level latency breakdowns and farm comparisons toward a sub-5-second document load target.
 
 FEATURED PROJECTS (each has a case study at /projects/<slug>):
 - POI Game (/projects/poi-game, live at poi-game.vercel.app): gamified labeling platform for USC IMSC. Players attribute GPS visits to points of interest; a consensus engine locks each question as labeled (with confidence) or ambiguous so exported datasets are reproducible. React 19, TypeScript, Leaflet, FastAPI, async SQLAlchemy, PostgreSQL + PostGIS (Neon), H3, Overture Maps data loaded with DuckDB, Google OAuth with HttpOnly JWT cookies, rate limiting. Deployed on Vercel + Render.

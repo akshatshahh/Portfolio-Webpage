@@ -4,27 +4,32 @@ const EXPERIENCIE = [
   {
     title: "Software Engineer",
     company: "Integrated Media Systems Center (IMSC) @ USC",
-    description: "Building software for IMSC's location and mobility research, continuing the platform work I started as a Research Assistant.",
-    date: "July 2026 - Present"
-  },
-  {
-    title: "Research Assistant",
-    company: "Integrated Media Systems Center (IMSC) @ USC",
-    description: "Built the POI Game under Dr. John Krumm: a production labeling platform (React, FastAPI, PostgreSQL + PostGIS) where players attribute GPS visits to points of interest. Designed the consensus engine that locks each question as a labeled or ambiguous example, plus Google OAuth, scoring, leaderboards and CSV / JSON exports of the training dataset.",
-    date: "Mar 2025 - May 2026"
+    date: "Mar 2025 - Present",
+    note: "Research Assistant, Mar 2025 - May 2026. Software Engineer since July 2026.",
+    points: [
+      "Design and deploy async Python FastAPI microservices powering a real-time geospatial platform for 500+ daily active users, cutting average endpoint latency by 35% over a synchronous baseline",
+      "Integrate Google OAuth 2.0 and JWT authentication across the microservices with structured error handling, securing every REST endpoint with zero reported authentication failures",
+      "Optimize PostgreSQL 16 PostGIS spatial indexes and H3 geospatial indexing to reduce query latency by 40%, supporting reliable ingestion of 10k+ daily user submissions into partitioned tables without dropped writes",
+    ],
   },
   {
     title: "Lead Teaching Assistant",
     company: "USC Viterbi K-12 STEM Center",
-    description: "Co-taught \"Discover Engineering\", a four-week program introducing high school students to engineering disciplines, with Dr. Darin Gray. Built the lectures, notes, weekly overviews and hands-on activity plans.",
-    date: "Apr 2025 - July 2025"
+    date: "Apr 2025 - July 2025",
+    points: [
+      "Directed a team of 8 teaching assistants delivering a month-long, 3-unit engineering course on algorithms, data structures and software engineering principles to 60+ students, earning a 95% positive feedback rating",
+    ],
   },
   {
     title: "Software Engineer Intern",
     company: "Microsoft, Hyderabad, India",
-    description: "On the OneDrive and SharePoint (ODSP) team, built interactive dashboards that tracked the online performance of Microsoft products, and a Power Automate tool that raised automated alerts when key processes such as loaders ran past their expected execution time, cutting incident response delays.",
-    date: "June 2023 - July 2023"
-  }
+    date: "June 2023 - July 2023",
+    points: [
+      "Built KQL and Azure Data Explorer dashboards tracking end-to-end latency for Word, Excel and PowerPoint across browser and Teams surfaces, giving production observability for a platform serving 85M+ monthly active users",
+      "Reduced manual performance monitoring overhead by 60% with automated monitoring pipelines in CI/CD that evaluated latency thresholds and flagged regressions across production environments daily",
+      "Delivered 8 dashboards with P50 / P75 / P95 percentile views, component-level latency breakdowns and farm comparisons, helping engineers find concurrency bottlenecks and scalability regressions toward a sub-5-second document load target",
+    ],
+  },
 ]
 ---
 
