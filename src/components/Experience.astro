@@ -38,10 +38,9 @@ const EXPERIENCIE = [
 ]
 ---
 
-<ol class="relative mt-16 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-px md:before:bg-gray-300 md:dark:before:bg-white/15">
-  {
-    EXPERIENCIE.map((experiencie, index) => (
-      <ExperienceItem {...experiencie} side={index % 2 === 0 ? 'left' : 'right'} />
-    ))
-  }
+<ol
+  data-testid="timeline"
+  class="relative ml-1.5 space-y-6 border-l-2 border-gray-300 dark:border-white/20"
+>
+  {EXPERIENCIE.map((experience) => <ExperienceItem {...experience} />)}
 </ol>
