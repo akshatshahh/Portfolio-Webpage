@@ -86,6 +86,15 @@ test("open source shows when it was last refreshed", async ({ page }) => {
     const stamp = page.getByTestId("oss-updated")
     await expect(stamp).toBeVisible()
     await expect(stamp).toHaveText(/^[A-Z][a-z]{2} \d{1,2}, \d{4}$/)
-    expect(Number.isNaN(Date.parse((await stamp.getAttribute("datetime")) ?? ""))).toBe(false)
+    const refreshedAt = (await stamp.getAttribute("datetime")) ?? ""
+    expect(Number.isNaN(Date.parse(refreshedAt))).toBe(false)
+    // Shown as the calendar day in Los Angeles, not UTC (a 10pm Pacific build is still "today").
+    const pacificDay = new Date(refreshedAt).toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+      timeZone: "America/Los_Angeles",
+    })
+    await expect(stamp).toHaveText(pacificDay)
   }
 })

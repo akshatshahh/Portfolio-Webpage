@@ -28,6 +28,12 @@ describe("dates", () => {
     expect(formatDuration("2025-03")).toBe("1 yr 8 mos")
   })
 
+  it("uses the month in Los Angeles, not UTC", () => {
+    // 03:00 UTC on Nov 1 is still the evening of Oct 31 in Los Angeles.
+    vi.setSystemTime(new Date("2026-11-01T03:00:00Z"))
+    expect(formatDuration("2026-08")).toBe("3 mos")
+  })
+
   it("handles exact years and single months", () => {
     expect(formatDuration("2024-01", "2025-12")).toBe("2 yrs")
     expect(formatDuration("2024-05", "2024-05")).toBe("1 mo")

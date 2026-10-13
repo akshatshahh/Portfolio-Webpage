@@ -6,9 +6,13 @@ function toIndex(ym: string): number {
   return y * 12 + (m - 1)
 }
 
+/** The current month in Los Angeles, so a late-evening Pacific build does not count next month yet. */
 function currentIndex(): number {
-  const now = new Date()
-  return now.getFullYear() * 12 + now.getMonth()
+  const [month, year] = new Date()
+    .toLocaleDateString("en-US", { month: "numeric", year: "numeric", timeZone: "America/Los_Angeles" })
+    .split("/")
+    .map(Number)
+  return year * 12 + (month - 1)
 }
 
 export function formatMonth(ym: string): string {

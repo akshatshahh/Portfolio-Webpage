@@ -26,12 +26,17 @@ const listed: Contribution[] =
     : [...merged].sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0)).slice(0, SUMMARY_COUNT)
 
 const formatStars = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : `${n}`)
-const formatDate = (iso: string, withDay = false) =>
+// PR and release dates are calendar dates, so they are read as UTC to stay on the right day.
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
+// The refresh time is an exact moment; show it in Pacific time, where Akshat is based.
+// (UTC would show tomorrow's date for any build after 5pm Pacific.)
+const formatRefreshed = (iso: string) =>
   new Date(iso).toLocaleDateString("en-US", {
     month: "short",
-    ...(withDay ? { day: "numeric" } : {}),
+    day: "numeric",
     year: "numeric",
-    timeZone: "UTC",
+    timeZone: "America/Los_Angeles",
   })
 
 const starsFor = (repo: string) => contributions.find((c) => c.repo.toLowerCase() === repo.toLowerCase())?.stars
@@ -49,7 +54,7 @@ const total = merged.length + inReview.length
   <p class="max-w-2xl text-gray-700 dark:text-gray-300">
     I contribute fixes upstream to AI infrastructure, agent frameworks and developer tools.
     <span class="mt-1 block text-sm text-gray-600 dark:text-gray-400">
-      Updated daily from GitHub · last refreshed <time data-testid="oss-updated" datetime={fetchedAt}>{formatDate(fetchedAt, true)}</time>
+      Updated daily from GitHub · last refreshed <time data-testid="oss-updated" datetime={fetchedAt}>{formatRefreshed(fetchedAt)}</time>
     </span>
   </p>
   <dl class="grid grid-cols-3 gap-3">
