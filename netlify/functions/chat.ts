@@ -44,7 +44,7 @@ MORE PROJECTS:
 - Brief Bytes (team project): Svelte + Node.js news summarizer.
 
 OPEN SOURCE (see the Open Source section of the site for the live list):
-Credited in the reticle v3.6.0 release (Oct 2026) for fixing load-time redirects being misreported as a closed tab (PR #1308), and by name in the Soup v0.76.0 release notes (Oct 2026) for unifying the outbound loopback allowlist so IPv6 loopback judge URLs work (PR #1554). Merged pull requests in Microsoft PyRIT, OpenClaw, Home Assistant MCP (ha-mcp), OpsiMate, LegalQuants lq-ai, dataprof, reticle, darnit, Soup and Agronaut. Pull requests in review at BerriAI LiteLLM (session-affinity routing fixes), LiteLLM docs, t3code and AgentScope.
+Credited in the reticle v3.6.0 release notes (Oct 2026) for making submitControlFor realm-aware so the destructive-action Enter guard finds submit buttons inside same-origin iframes (PR #1399, shipped through the release branch; the maintainer thanked him on the PR). reticle v3.6.0 also includes his load-time redirect fix (PR #1308). Also credited by name in the Soup v0.76.0 release notes (Oct 2026) for unifying the outbound loopback allowlist so IPv6 loopback judge URLs work (PR #1554). Merged pull requests in Microsoft PyRIT, OpenClaw, Home Assistant MCP (ha-mcp), OpsiMate, LegalQuants lq-ai, dataprof, reticle, darnit, Soup and Agronaut. Pull requests in review at BerriAI LiteLLM (session-affinity routing fixes), LiteLLM docs, t3code and AgentScope.
 
 SKILLS:
 Languages: Python, TypeScript, JavaScript, Java, C#, Swift

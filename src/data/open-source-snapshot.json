@@ -25,7 +25,7 @@
       "owner": "BerriAI",
       "state": "open",
       "date": "2026-10-10T23:23:23Z",
-      "stars": 61085
+      "stars": 61091
     },
     {
       "title": "Validate PATCH /users/:id and /users/:id/reset-password bodies with zod",
@@ -52,7 +52,7 @@
       "owner": "BerriAI",
       "state": "open",
       "date": "2026-10-07T23:30:29Z",
-      "stars": 61085
+      "stars": 61091
     },
     {
       "title": "fix(whatsapp): link 131047 delivery statuses back to their follow-up",
@@ -70,7 +70,17 @@
       "owner": "pingdotgg",
       "state": "open",
       "date": "2026-10-05T22:34:39Z",
-      "stars": 27193
+      "stars": 27207
+    },
+    {
+      "title": "fix(browser): find submit controls across realms in submitControlFor",
+      "url": "https://github.com/reticlehq/reticle/pull/1399",
+      "repo": "reticlehq/reticle",
+      "owner": "reticlehq",
+      "state": "merged",
+      "shippedIn": "v3.6.0",
+      "date": "2026-10-05T18:15:36Z",
+      "stars": 1215
     },
     {
       "title": "fix(validation): tell agents how to fix rejected config tool calls",
@@ -79,7 +89,7 @@
       "owner": "homeassistant-ai",
       "state": "merged",
       "date": "2026-10-06T09:10:49Z",
-      "stars": 5045
+      "stars": 5046
     },
     {
       "title": "fix(auto-reply): surface silent inbound media staging failures",
@@ -88,7 +98,7 @@
       "owner": "openclaw",
       "state": "merged",
       "date": "2026-10-05T01:27:50Z",
-      "stars": 391800
+      "stars": 391802
     },
     {
       "title": "fix(tool): stop suggesting tool-wide allow rules for base tools",
@@ -142,7 +152,7 @@
       "owner": "MakazhanAlpamys",
       "state": "merged",
       "date": "2026-10-05T11:15:08Z",
-      "stars": 8626
+      "stars": 8629
     },
     {
       "title": "Enforce matter-scoped tool-egress ceiling (AG-03, DE-358 item 6)",
@@ -163,5 +173,5 @@
       "stars": 27
     }
   ],
-  "fetchedAt": "2026-10-12T22:46:21.462Z"
+  "fetchedAt": "2026-10-13T00:36:18.849Z"
 }

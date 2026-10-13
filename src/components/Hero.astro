@@ -9,7 +9,7 @@ import { getContributions, type OpenSourceData } from "@/lib/openSource"
 import snapshot from "@/data/open-source-snapshot.json"
 
 const { contributions } = await getContributions(snapshot as OpenSourceData)
-const mergedCount = contributions.filter((c) => c.state === "merged").length
+const shippedCount = contributions.filter((c) => c.state === "merged").length
 ---
 
 <div class="max-w-2xl">
@@ -42,8 +42,8 @@ const mergedCount = contributions.filter((c) => c.state === "merged").length
     I build backend systems that hold up in production. At <strong>USC IMSC</strong> I design async FastAPI
     microservices for a real-time geospatial platform used by <strong>500+ people a day</strong>, and cut query
     latency 40% with PostGIS and H3 indexing. At <strong>Microsoft</strong> I built latency observability for Office
-    apps serving <strong>85M+ users</strong>. I also ship fixes upstream, with
-    <strong>{mergedCount} merged pull requests</strong> in projects like Microsoft PyRIT and OpenClaw.
+    apps serving <strong>85M+ users</strong>. I also contribute upstream, with
+    <strong>{shippedCount} pull requests shipped</strong> in projects like Microsoft PyRIT, OpenClaw and reticle.
   </p>
   <nav class="flex flex-wrap gap-4 mt-8">
     <SocialPill href="mailto:akshatshahh2003@gmail.com">

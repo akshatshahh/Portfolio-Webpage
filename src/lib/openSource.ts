@@ -1,6 +1,11 @@
 const AUTHOR = "akshatshahh"
 // Team and coursework repos, not upstream open source.
 const EXCLUDED_OWNERS = new Set(["suthar-naresh", "devasy"])
+// Some maintainers land a PR through a release branch and close it instead of merging,
+// so GitHub reports it as closed. These shipped anyway.
+const SHIPPED_VIA_RELEASE: Record<string, string> = {
+  "https://github.com/reticlehq/reticle/pull/1399": "v3.6.0",
+}
 
 export interface Contribution {
   title: string
@@ -8,6 +13,8 @@ export interface Contribution {
   repo: string
   owner: string
   state: "merged" | "open"
+  /** Set when a closed PR shipped through a release branch instead of being merged */
+  shippedIn?: string
   date: string
   stars?: number
 }
@@ -54,7 +61,10 @@ export async function fetchContributions(): Promise<OpenSourceData> {
     if (EXCLUDED_OWNERS.has(owner.toLowerCase())) continue
 
     const mergedAt = item.pull_request?.merged_at
-    if (item.state === "open") {
+    const shippedIn = SHIPPED_VIA_RELEASE[item.html_url]
+    if (shippedIn) {
+      contributions.push({ title: item.title, url: item.html_url, repo, owner, state: "merged", shippedIn, date: item.created_at })
+    } else if (item.state === "open") {
       contributions.push({ title: item.title, url: item.html_url, repo, owner, state: "open", date: item.created_at })
     } else if (mergedAt) {
       contributions.push({ title: item.title, url: item.html_url, repo, owner, state: "merged", date: mergedAt })
