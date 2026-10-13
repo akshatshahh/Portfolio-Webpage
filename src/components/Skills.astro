@@ -1,0 +1,15 @@
+---
+import { SKILL_GROUPS } from "@/data/profile"
+import TagList from "./TagList.astro"
+---
+
+<div class="grid gap-x-10 gap-y-6 md:grid-cols-2 lg:grid-cols-3">
+  {
+    SKILL_GROUPS.map((group) => (
+      <section aria-label={group.name}>
+        <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">{group.name}</h3>
+        <TagList tags={group.tags} />
+      </section>
+    ))
+  }
+</div>
