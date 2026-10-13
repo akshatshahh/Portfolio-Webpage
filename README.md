@@ -33,4 +33,8 @@ screenshots and traces when something fails. Netlify runs the unit tests before 
 - Projects: `src/data/projects.ts` (screenshots in `public/projects/`)
 - Open source: fetched from GitHub at build time (`src/lib/openSource.ts`); refresh the offline
   fallback with `pnpm oss:snapshot`. Release-note credits live in `src/data/releaseCredits.ts`.
+- Daily refresh: `netlify/functions/daily-rebuild.mts` is a Netlify scheduled function that calls
+  the site's build hook every day at 13:00 UTC, so the open source section stays current without a
+  push. It reads the hook URL from the `NETLIFY_BUILD_HOOK` environment variable in Netlify; never
+  commit the URL. Check it under Netlify → Logs → Functions → daily-rebuild.
 - Resume: `public/Akshat-Shah-Resume.pdf` and its preview image `public/resume-preview.webp`

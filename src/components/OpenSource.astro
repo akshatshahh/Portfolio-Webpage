@@ -12,7 +12,7 @@ interface Props {
 const { variant = "full" } = Astro.props
 const SUMMARY_COUNT = 4
 
-const { contributions } = await getContributions(snapshot as OpenSourceData)
+const { contributions, fetchedAt } = await getContributions(snapshot as OpenSourceData)
 
 const merged = contributions.filter((c) => c.state === "merged")
 const inReview = contributions.filter((c) => c.state === "open")
@@ -26,8 +26,13 @@ const listed: Contribution[] =
     : [...merged].sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0)).slice(0, SUMMARY_COUNT)
 
 const formatStars = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : `${n}`)
-const formatDate = (iso: string) =>
-  new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
+const formatDate = (iso: string, withDay = false) =>
+  new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    ...(withDay ? { day: "numeric" } : {}),
+    year: "numeric",
+    timeZone: "UTC",
+  })
 
 const starsFor = (repo: string) => contributions.find((c) => c.repo.toLowerCase() === repo.toLowerCase())?.stars
 
@@ -42,8 +47,10 @@ const total = merged.length + inReview.length
 
 <div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
   <p class="max-w-2xl text-gray-700 dark:text-gray-300">
-    I contribute fixes upstream to AI infrastructure, agent frameworks and developer tools. Pulled from GitHub every
-    time the site builds.
+    I contribute fixes upstream to AI infrastructure, agent frameworks and developer tools.
+    <span class="mt-1 block text-sm text-gray-600 dark:text-gray-400">
+      Updated daily from GitHub · last refreshed <time data-testid="oss-updated" datetime={fetchedAt}>{formatDate(fetchedAt, true)}</time>
+    </span>
   </p>
   <dl class="grid grid-cols-3 gap-3">
     {

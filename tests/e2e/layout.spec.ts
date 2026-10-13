@@ -79,3 +79,13 @@ test("open source shows release credits and contributions", async ({ page }) => 
   await expect(page).toHaveURL(/\/open-source$/)
   expect(await page.getByTestId("contributions").locator(":scope > li").count()).toBeGreaterThan(4)
 })
+
+test("open source shows when it was last refreshed", async ({ page }) => {
+  for (const path of ["/", "/open-source"]) {
+    await page.goto(path)
+    const stamp = page.getByTestId("oss-updated")
+    await expect(stamp).toBeVisible()
+    await expect(stamp).toHaveText(/^[A-Z][a-z]{2} \d{1,2}, \d{4}$/)
+    expect(Number.isNaN(Date.parse((await stamp.getAttribute("datetime")) ?? ""))).toBe(false)
+  }
+})
