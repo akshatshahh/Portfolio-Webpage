@@ -1,6 +1,6 @@
 import { test, expect, PAGES } from "./fixtures"
 
-const SITE = "https://akshatshah.netlify.app"
+const SITE = "https://akshatshah.tech"
 const withSlash = (path: string) => (path.endsWith("/") ? path : `${path}/`)
 
 test("every page has a canonical URL, a description and a share card", async ({ page, request }) => {

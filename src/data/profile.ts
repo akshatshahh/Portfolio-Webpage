@@ -12,7 +12,7 @@ export const PROFILE = {
   relocation: "Open to relocating anywhere in the US",
   lookingFor: ["Software Engineer", "AI Engineer", "Backend Engineer", "Full Stack Engineer"],
   email: "akshatshahh2003@gmail.com",
-  site: "https://akshatshah.netlify.app",
+  site: "https://akshatshah.tech",
   github: "https://github.com/akshatshahh",
   linkedin: "https://www.linkedin.com/in/akshatshahh",
   employer: { name: "Integrated Media Systems Center (IMSC), University of Southern California", url: "https://imsc.usc.edu" },
