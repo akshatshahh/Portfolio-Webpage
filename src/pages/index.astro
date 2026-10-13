@@ -15,6 +15,7 @@ import Hero from "@/components/Hero.astro"
 import Education from "@/components/Education.astro"
 import EducationHat from "@/components/icons/EducationHat.astro"
 import Chatbot from "@/components/Chatbot.astro"
+import Skills from "@/components/Skills.astro"
 import { FEATURED_PROJECTS, MORE_PROJECTS } from "@/data/projects"
 
 const headingClass = "flex items-center mb-6 text-3xl font-semibold gap-x-3 text-gray-900 dark:text-white"
@@ -22,8 +23,8 @@ const projectCount = FEATURED_PROJECTS.length + MORE_PROJECTS.length
 ---
 
 <Layout
-  title="Akshat Shah · Software Engineer"
-  description="Akshat Shah is a backend and full stack software engineer in Los Angeles (MS CS, USC 2026), open to relocating anywhere in the US."
+  title="Akshat Shah · Software Engineer & AI Engineer in Los Angeles"
+  description="Akshat Shah is a Software Engineer and AI Engineer in Los Angeles building backend services, full stack apps and LLM agents. USC IMSC, ex-Microsoft, MS CS from USC (2026). Open to relocating anywhere in the US."
 >
   <main class="px-4">
     <SectionContainer class="pt-28 pb-12 md:pt-32 md:pb-16">
@@ -55,6 +56,14 @@ const projectCount = FEATURED_PROJECTS.length + MORE_PROJECTS.length
           Open Source
         </h2>
         <OpenSource variant="summary" />
+      </SectionContainer>
+
+      <SectionContainer id="skills">
+        <h2 class={headingClass}>
+          <CodeIcon class="size-7" />
+          Skills
+        </h2>
+        <Skills />
       </SectionContainer>
 
       <SectionContainer id="about-me">

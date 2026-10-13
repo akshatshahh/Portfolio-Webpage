@@ -15,7 +15,8 @@ Email: akshatshahh2003@gmail.com
 LinkedIn: linkedin.com/in/akshatshahh
 GitHub: github.com/akshatshahh
 Location: Based in Los Angeles, CA. Open to relocating anywhere in the US.
-Looking for: Software Engineer, Backend Engineer and Full Stack Engineer roles.
+Titles: Software Engineer and AI Engineer (backend and full stack).
+Looking for: Software Engineer, AI Engineer, Backend Engineer and Full Stack Engineer roles.
 
 EDUCATION:
 - MS in Computer Science, USC Viterbi School of Engineering (Aug 2024 to May 2026, graduated), GPA: 3.66. Courses: Analysis of Algorithms, Database Systems, Software Architectures, Web Technologies, Applied Cryptography, Applied NLP, Information Retrieval and Web Search Engines, Advanced Mobile Devices and Game Consoles.
@@ -51,7 +52,8 @@ Languages: Python, TypeScript, JavaScript, Java, C#, Swift
 Backend: FastAPI, Node.js, Express, Fastify, ASP.NET Core, Flask, REST, WebSockets / SignalR
 Frontend: React, Next.js, Angular, Svelte, Tailwind CSS
 Data: PostgreSQL, PostGIS, SQLAlchemy, MongoDB, Redis, SQLite, ChromaDB
-AI: LLM tool use (Claude, Gemini, Gemma via Ollama), RAG, agents
+AI & LLM engineering: Claude, Gemini and OpenAI-compatible APIs, LangChain, LiteLLM, MCP, Mastra, Ollama + Gemma, RAG and vector search (ChromaDB, MongoDB Atlas Vector Search), Hugging Face, Pydantic; agents with tool use and cost budgets
+Machine learning: PyTorch, TensorFlow, scikit-learn, Pandas, NumPy, Jupyter, OpenCV, AWS SageMaker, CUDA
 Infra: Docker, Vercel, Render, Netlify, GitHub Actions
 
 INTERESTS: Backend and distributed systems, AI infrastructure, open source, food content creation (thegajabfoodie on Instagram).`;
