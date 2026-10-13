@@ -14,7 +14,7 @@ Name: Akshat Divyang Shah
 Email: akshatshahh2003@gmail.com
 LinkedIn: linkedin.com/in/akshatshahh
 GitHub: github.com/akshatshahh
-Location: Los Angeles, CA. Open to relocation.
+Location: Based in Los Angeles, CA. Open to relocating anywhere in the US.
 Looking for: Software Engineer, Backend Engineer and Full Stack Engineer roles.
 
 EDUCATION:

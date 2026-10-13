@@ -1,1 +1,36 @@
+# Akshat Shah · Portfolio
 
+Personal site built with [Astro](https://astro.build) and Tailwind CSS, deployed on Netlify.
+Live at [akshatshah.netlify.app](https://akshatshah.netlify.app).
+
+## Develop
+
+```sh
+pnpm install
+pnpm dev            # http://localhost:4321
+```
+
+## Test
+
+```sh
+pnpm test:unit      # chat function, open source fetcher, date math (Vitest)
+pnpm build          # type check + production build
+pnpm test:e2e       # browser tests against the build (Playwright)
+```
+
+Browser tests run on a laptop (1440px) and a phone (Pixel 7), in light and dark mode. They check that
+every page loads without script errors, nothing scrolls sideways at common widths, contrast and
+accessibility (axe) pass, the theme survives navigation, links and images resolve, the chat works,
+and the homepage stays short enough to scan.
+
+First run: `pnpm exec playwright install chromium` (or set `PW_CHROMIUM_PATH` to an installed Chromium).
+
+CI (`.github/workflows/ci.yml`) runs all of this on every pull request and push to `main`, and uploads
+screenshots and traces when something fails. Netlify runs the unit tests before every deploy.
+
+## Content
+
+- Projects: `src/data/projects.ts` (screenshots in `public/projects/`)
+- Open source: fetched from GitHub at build time (`src/lib/openSource.ts`); refresh the offline
+  fallback with `pnpm oss:snapshot`. Release-note credits live in `src/data/releaseCredits.ts`.
+- Resume: `public/Akshat-Shah-Resume.pdf` and its preview image `public/resume-preview.webp`
