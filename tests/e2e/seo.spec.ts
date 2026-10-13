@@ -93,3 +93,9 @@ test("AI Engineer is visible without scrolling and the skills include AI", async
   const ai = page.locator('#skills section[aria-label="AI & LLM engineering"] li')
   expect(await ai.count()).toBeGreaterThanOrEqual(8)
 })
+
+test("the Google Search Console verification file is served unchanged", async ({ request }) => {
+  const res = await request.get("/google63cede610adae9ca.html")
+  expect(res.status()).toBe(200)
+  expect(await res.text()).toBe("google-site-verification: google63cede610adae9ca.html")
+})
