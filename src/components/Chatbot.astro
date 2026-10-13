@@ -16,7 +16,9 @@ import ChatIcon from "@/components/icons/ChatIcon.astro"
 <!-- Chat Window -->
 <div
   id="chat-window"
-  class="fixed bottom-6 right-6 z-50 flex flex-col w-[calc(100vw-3rem)] sm:w-[400px] h-[500px] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-hidden translate-y-4 opacity-0 pointer-events-none transition-all duration-300"
+  role="dialog"
+  aria-label="Chat about Akshat"
+  class="fixed bottom-6 right-6 z-50 flex flex-col w-[calc(100vw-3rem)] sm:w-[400px] h-[500px] max-h-[calc(100dvh-3rem)] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 overflow-hidden translate-y-4 opacity-0 pointer-events-none transition-all duration-300 xl:top-0 xl:bottom-0 xl:right-0 xl:h-dvh xl:max-h-none xl:w-[var(--chat-width)] xl:rounded-none xl:border-y-0 xl:border-r-0 xl:shadow-none"
 >
   <!-- Header -->
   <div class="flex items-center justify-between px-4 py-3 bg-yellow-500 text-gray-900">
@@ -79,6 +81,25 @@ import ChatIcon from "@/components/icons/ChatIcon.astro"
   </div>
 </div>
 
+<style is:global>
+  /* On wide screens the open chat docks as a sidebar and the page moves over, so it never
+     covers content. Smaller screens keep the floating panel. */
+  :root {
+    --chat-width: 380px;
+  }
+  body {
+    transition: padding-right 0.3s ease;
+  }
+  @media (min-width: 1280px) {
+    html.chat-open body {
+      padding-right: var(--chat-width);
+    }
+    html.chat-open body > header {
+      width: calc(100% - var(--chat-width));
+    }
+  }
+</style>
+
 <style>
   @keyframes subtle-pulse {
     0%, 100% { box-shadow: 0 4px 14px rgba(234, 179, 8, 0.3); }
@@ -120,6 +141,7 @@ import ChatIcon from "@/components/icons/ChatIcon.astro"
 
   function openChat() {
     isOpen = true;
+    document.documentElement.classList.add("chat-open");
     cta.classList.add("opacity-0", "pointer-events-none", "scale-95");
     chatWindow.classList.remove("opacity-0", "pointer-events-none", "translate-y-4");
     chatInput.focus();
@@ -127,6 +149,7 @@ import ChatIcon from "@/components/icons/ChatIcon.astro"
 
   function closeChat() {
     isOpen = false;
+    document.documentElement.classList.remove("chat-open");
     chatWindow.classList.add("opacity-0", "pointer-events-none", "translate-y-4");
     cta.classList.remove("opacity-0", "pointer-events-none", "scale-95");
   }
