@@ -1,0 +1,56 @@
+---
+import { MORE_PROJECTS } from "@/data/projects"
+import TagList from "./TagList.astro"
+import ActionLink from "./ActionLink.astro"
+import Screenshot from "./Screenshot.astro"
+import GitHub from "./icons/GitHub.astro"
+import ArrowUpRight from "./icons/ArrowUpRight.astro"
+import Mail from "./icons/Mail.astro"
+
+const ACCESS_REQUEST = "mailto:akshatshahh2003@gmail.com?subject=Code%20walkthrough%3A%20"
+---
+
+<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+  {
+    MORE_PROJECTS.map((project) => (
+      <article class="flex flex-col rounded-xl border border-gray-200 bg-white/70 p-4 shadow-sm dark:border-white/10 dark:bg-gray-900/70">
+        {project.image && <Screenshot src={project.image} alt={`Screenshot of ${project.title}`} />}
+        <div class="mt-4 flex flex-1 flex-col">
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="text-lg font-bold text-gray-900 dark:text-white">{project.title}</h3>
+            {project.private && (
+              <span class="rounded-md border border-gray-300 px-1.5 py-0.5 text-xs font-medium text-gray-600 dark:border-white/20 dark:text-gray-300">
+                Private repo
+              </span>
+            )}
+          </div>
+          {project.context && <p class="mt-1 text-xs text-gray-600 dark:text-gray-400">{project.context}</p>}
+          <p class="mt-2 flex-1 text-sm leading-relaxed text-gray-700 dark:text-gray-300">{project.description}</p>
+          <div class="mt-4">
+            <TagList tags={project.tags} />
+          </div>
+          <footer class="mt-4 flex flex-wrap gap-2">
+            {project.live && (
+              <ActionLink href={project.live} variant="primary">
+                {project.liveLabel ?? "Live demo"}
+                <ArrowUpRight class="size-4" />
+              </ActionLink>
+            )}
+            {project.github && (
+              <ActionLink href={project.github}>
+                <GitHub class="size-4" />
+                Source code
+              </ActionLink>
+            )}
+            {project.private && (
+              <ActionLink href={ACCESS_REQUEST + encodeURIComponent(project.title)} external={false}>
+                <Mail class="size-4" />
+                Request a walkthrough
+              </ActionLink>
+            )}
+          </footer>
+        </div>
+      </article>
+    ))
+  }
+</div>

@@ -99,15 +99,17 @@ import ChatIcon from "@/components/icons/ChatIcon.astro"
   let lastSendTime = 0;
   let conversationHistory: { role: string; parts: { text: string }[] }[] = [];
 
-  const cta = document.getElementById("chat-cta") as HTMLButtonElement;
-  const chatWindow = document.getElementById("chat-window") as HTMLDivElement;
-  const closeBtn = document.getElementById("close-chat") as HTMLButtonElement;
-  const chatMessages = document.getElementById("chat-messages") as HTMLDivElement;
-  const chatForm = document.getElementById("chat-form") as HTMLFormElement;
-  const chatInput = document.getElementById("chat-input") as HTMLInputElement;
-  const sendBtn = document.getElementById("send-btn") as HTMLButtonElement;
-  const msgCounter = document.getElementById("msg-counter") as HTMLSpanElement;
-  const starterPrompts = document.getElementById("starter-prompts") as HTMLDivElement;
+  // Page navigations (view transitions) replace these elements, so they are
+  // looked up again and re-wired on every astro:page-load.
+  let cta: HTMLButtonElement;
+  let chatWindow: HTMLDivElement;
+  let closeBtn: HTMLButtonElement;
+  let chatMessages: HTMLDivElement;
+  let chatForm: HTMLFormElement;
+  let chatInput: HTMLInputElement;
+  let sendBtn: HTMLButtonElement;
+  let msgCounter: HTMLSpanElement;
+  let starterPrompts: HTMLDivElement;
 
   function updateCounter() {
     const remaining = MAX_MESSAGES - messageCount;
@@ -281,25 +283,40 @@ import ChatIcon from "@/components/icons/ChatIcon.astro"
     }
   }
 
-  // Event listeners
-  cta.addEventListener("click", openChat);
-  closeBtn.addEventListener("click", closeChat);
+  function init() {
+    const button = document.getElementById("chat-cta") as HTMLButtonElement | null;
+    if (!button) return;
+    cta = button;
+    chatWindow = document.getElementById("chat-window") as HTMLDivElement;
+    closeBtn = document.getElementById("close-chat") as HTMLButtonElement;
+    chatMessages = document.getElementById("chat-messages") as HTMLDivElement;
+    chatForm = document.getElementById("chat-form") as HTMLFormElement;
+    chatInput = document.getElementById("chat-input") as HTMLInputElement;
+    sendBtn = document.getElementById("send-btn") as HTMLButtonElement;
+    msgCounter = document.getElementById("msg-counter") as HTMLSpanElement;
+    starterPrompts = document.getElementById("starter-prompts") as HTMLDivElement;
+    // A fresh page shows an empty conversation, so the history starts over too.
+    isOpen = false;
+    conversationHistory = [];
 
-  chatForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    sendMessage(chatInput.value);
-  });
-
-  document.querySelectorAll(".starter-btn").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      sendMessage(btn.textContent || "");
+    cta.addEventListener("click", openChat);
+    closeBtn.addEventListener("click", closeChat);
+    chatForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      sendMessage(chatInput.value);
     });
-  });
+    document.querySelectorAll(".starter-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        sendMessage(btn.textContent || "");
+      });
+    });
+    updateCounter();
+  }
 
   // Close on Escape key
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && isOpen) closeChat();
   });
 
-  updateCounter();
+  document.addEventListener("astro:page-load", init);
 </script>

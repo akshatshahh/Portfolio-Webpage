@@ -1,0 +1,156 @@
+---
+import { getContributions, type Contribution, type OpenSourceData } from "@/lib/openSource"
+import snapshot from "@/data/open-source-snapshot.json"
+import { RELEASE_CREDITS } from "@/data/releaseCredits"
+import ActionLink from "./ActionLink.astro"
+
+interface Props {
+  /** "summary" for the homepage (top contributions only), "full" for /open-source */
+  variant?: "summary" | "full"
+}
+
+const { variant = "full" } = Astro.props
+const SUMMARY_COUNT = 4
+
+const { contributions, fetchedAt } = await getContributions(snapshot as OpenSourceData)
+
+const merged = contributions.filter((c) => c.state === "merged")
+const inReview = contributions.filter((c) => c.state === "open")
+const projectCount = new Set(contributions.map((c) => c.repo.toLowerCase())).size
+// Full list: shipped work first, then most recent. Summary: the best-known projects.
+const listed: Contribution[] =
+  variant === "full"
+    ? [...merged, ...inReview].sort((a, b) =>
+        a.state === b.state ? b.date.localeCompare(a.date) : a.state === "merged" ? -1 : 1
+      )
+    : [...merged].sort((a, b) => (b.stars ?? 0) - (a.stars ?? 0)).slice(0, SUMMARY_COUNT)
+
+const formatStars = (n: number) => (n >= 1000 ? `${(n / 1000).toFixed(n >= 10000 ? 0 : 1)}k` : `${n}`)
+// PR and release dates are calendar dates, so they are read as UTC to stay on the right day.
+const formatDate = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })
+// The refresh time is an exact moment; show it in Pacific time, where Akshat is based.
+// (UTC would show tomorrow's date for any build after 5pm Pacific.)
+const formatRefreshed = (iso: string) =>
+  new Date(iso).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "America/Los_Angeles",
+  })
+
+const starsFor = (repo: string) => contributions.find((c) => c.repo.toLowerCase() === repo.toLowerCase())?.stars
+
+const STATS = [
+  { value: merged.length, label: "PRs shipped" },
+  { value: projectCount, label: "projects" },
+  { value: inReview.length, label: "in review" },
+]
+const ALL_PRS = "https://github.com/search?q=is%3Apr+author%3Aakshatshahh+-user%3Aakshatshahh&type=pullrequests"
+const total = merged.length + inReview.length
+---
+
+<div class="grid gap-6 lg:grid-cols-[1fr_auto] lg:items-end">
+  <p class="max-w-2xl text-gray-700 dark:text-gray-300">
+    I contribute fixes upstream to AI infrastructure, agent frameworks and developer tools.
+    <span class="mt-1 block text-sm text-gray-600 dark:text-gray-400">
+      Updated daily from GitHub · last refreshed <time data-testid="oss-updated" datetime={fetchedAt}>{formatRefreshed(fetchedAt)}</time>
+    </span>
+  </p>
+  <dl class="grid grid-cols-3 gap-3">
+    {
+      STATS.map((s) => (
+        <div class="flex flex-col-reverse rounded-xl border border-gray-200 bg-white/70 px-4 py-3 text-center dark:border-white/10 dark:bg-gray-900/70">
+          <dt class="text-xs text-gray-600 dark:text-gray-400">{s.label}</dt>
+          <dd class="text-2xl font-bold text-yellow-600 dark:text-yellow-400">{s.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</div>
+
+{
+  RELEASE_CREDITS.length > 0 && (
+    <section class="mt-8" aria-labelledby="release-credits">
+      <h3 id="release-credits" class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+        Credited in release notes
+      </h3>
+      <ul class="mt-3 grid gap-4 lg:grid-cols-2">
+        {RELEASE_CREDITS.map((r) => {
+          const stars = starsFor(r.repo)
+          return (
+            <li class="flex flex-col rounded-xl border border-yellow-400/60 bg-yellow-50 p-5 dark:border-yellow-400/40 dark:bg-yellow-400/5">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
+                <img src={`https://github.com/${r.repo.split("/")[0]}.png?size=40`} alt="" width="20" height="20" loading="lazy" class="size-5 rounded" />
+                <span class="font-semibold text-gray-900 dark:text-white">{r.repo}</span>
+                <span class="rounded-md bg-gray-900 px-1.5 py-0.5 font-mono text-xs text-white dark:bg-white dark:text-gray-900">{r.version}</span>
+                {stars !== undefined && <span class="text-gray-600 dark:text-gray-400">★ {formatStars(stars)}</span>}
+                <time datetime={r.date} class="text-gray-600 dark:text-gray-400">{formatDate(r.date)}</time>
+              </div>
+              {r.title && <p class="mt-3 font-medium text-gray-900 dark:text-white">{r.title}</p>}
+              <blockquote class="mt-2 flex-1 border-l-2 border-yellow-500 pl-3 text-sm text-gray-700 dark:text-gray-300">
+                <p class="italic">{r.quote}</p>
+                {r.quoteBy && <footer class="mt-1 text-xs not-italic text-gray-600 dark:text-gray-400">{r.quoteBy}</footer>}
+              </blockquote>
+              <div class="mt-3 flex flex-wrap gap-4 text-sm font-semibold">
+                <a href={r.url} target="_blank" rel="noopener noreferrer" class="text-gray-900 underline decoration-yellow-500 underline-offset-4 hover:decoration-2 dark:text-white">
+                  {r.urlLabel}
+                </a>
+                <a href={r.pr} target="_blank" rel="noopener noreferrer" class="text-gray-900 underline decoration-yellow-500 underline-offset-4 hover:decoration-2 dark:text-white">
+                  See the pull request
+                </a>
+              </div>
+            </li>
+          )
+        })}
+      </ul>
+    </section>
+  )
+}
+
+<section class="mt-8" aria-labelledby="contributions">
+  <h3 id="contributions" class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+    {variant === "full" ? `All contributions (${total})` : "Top contributions"}
+  </h3>
+  <ul data-testid="contributions" class={`mt-3 grid gap-4 md:grid-cols-2 ${variant === "summary" ? "lg:grid-cols-4" : "lg:grid-cols-3"}`}>
+    {
+      listed.map((c) => (
+        <li class="min-w-0">
+          <a
+            href={c.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex h-full flex-col rounded-xl border border-gray-200 bg-white/70 p-4 transition hover:-translate-y-0.5 hover:border-yellow-400 hover:shadow-lg dark:border-white/10 dark:bg-gray-900/70 dark:hover:border-yellow-400/60"
+          >
+            <div class="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <img src={`https://github.com/${c.owner}.png?size=40`} alt="" width="20" height="20" loading="lazy" class="size-5 rounded" />
+              <span class="truncate font-medium">{c.repo}</span>
+              {c.stars !== undefined && <span class="shrink-0">★ {formatStars(c.stars)}</span>}
+            </div>
+            <p class="mt-2 flex-1 font-medium text-gray-800 [overflow-wrap:anywhere] dark:text-gray-100">{c.title}</p>
+            <div class="mt-3 flex items-center justify-between text-xs">
+              {c.state === "merged" ? (
+                <span class="rounded-full bg-purple-700 px-2 py-0.5 font-medium text-white">
+                  {c.shippedIn ? `Shipped in ${c.shippedIn}` : "Merged"}
+                </span>
+              ) : (
+                <span class="rounded-full bg-green-700 px-2 py-0.5 font-medium text-white">In review</span>
+              )}
+              <time datetime={c.date} class="text-gray-600 dark:text-gray-400">{formatDate(c.date)}</time>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<div class="mt-6">
+  {
+    variant === "summary" ? (
+      <ActionLink href="/open-source">See all {total} contributions →</ActionLink>
+    ) : (
+      <ActionLink href={ALL_PRS}>See every pull request on GitHub ↗</ActionLink>
+    )
+  }
+</div>

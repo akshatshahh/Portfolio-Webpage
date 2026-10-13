@@ -11,7 +11,7 @@ const THEMES = ["Light", "Dark", "System"]
     id="theme-toggle-btn"
     class="appearance-none border-none flex hover:scale-125 transition"
   >
-    <span class="sr-only">Elige el tema</span>
+    <span class="sr-only">Choose theme</span>
     <SunIcon id="light" class="theme-toggle-icon size-5 transition-all" />
     <MoonIcon
       id="dark"
@@ -29,7 +29,7 @@ const THEMES = ["Light", "Dark", "System"]
     <ul>
       {
         THEMES.map((theme) => (
-          <li class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm">
+          <li data-theme={theme.toLowerCase()} class="themes-menu-option px-2 py-1.5 cursor-default hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm">
             {theme}
           </li>
         ))
@@ -55,58 +55,51 @@ const THEMES = ["Light", "Dark", "System"]
   }
 </style>
 
-<script is:inline>
-  let remove = null
-  const matchMedia = window.matchMedia("(prefers-color-scheme: dark)")
-  const themesMenu = document.getElementById("themes-menu")
+<script>
+  // The theme class is first set by the inline script in Layout's <head> (no flash).
+  // This keeps it correct across view-transition navigations and wires up the menu,
+  // whose elements are replaced on every navigation.
+  const STORAGE_KEY = "theme"
+  const media = window.matchMedia("(prefers-color-scheme: dark)")
 
-  const getThemePreference = () => {
-    if (typeof localStorage !== "undefined") {
-      return localStorage.getItem("theme") ?? "system"
+  const readTheme = () => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY)
+      return stored === "light" || stored === "dark" ? stored : "system"
+    } catch {
+      return "system"
     }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light"
   }
 
-  const updateIcon = (themePreference) => {
-    document.querySelectorAll(".theme-toggle-icon").forEach((element) => {
-      element.style.scale = element.id === themePreference ? "1" : "0"
+  const applyTheme = () => {
+    const theme = readTheme()
+    const isDark = theme === "dark" || (theme === "system" && media.matches)
+    document.documentElement.classList.toggle("dark", isDark)
+    document.querySelectorAll<HTMLElement>(".theme-toggle-icon").forEach((icon) => {
+      icon.style.scale = icon.id === theme ? "1" : "0"
     })
   }
 
-  const updateTheme = () => {
-    if (remove != null) {
-      remove()
-    }
-    matchMedia.addEventListener("change", updateTheme)
-    remove = () => {
-      matchMedia.removeEventListener("change", updateTheme)
-    }
+  media.addEventListener("change", applyTheme)
+  document.addEventListener("astro:after-swap", applyTheme)
+  document.addEventListener("click", () => document.getElementById("themes-menu")?.classList.remove("open"))
 
-    const themePreference = getThemePreference()
-    const isDark =
-      themePreference === "dark" ||
-      (themePreference === "system" && matchMedia.matches)
-
-    updateIcon(themePreference)
-    document.documentElement.classList[isDark ? "add" : "remove"]("dark")
-  }
-
-  updateTheme()
-
-  document.addEventListener("click", () => themesMenu.classList.remove("open"))
-
-  document.getElementById("theme-toggle-btn").addEventListener("click", (e) => {
-    e.stopPropagation()
-    const isClosed = !themesMenu.classList.contains("open")
-    themesMenu.classList[isClosed ? "add" : "remove"]("open")
-  })
-
-  document.querySelectorAll(".themes-menu-option").forEach((element) => {
-    element.addEventListener("click", (e) => {
-      localStorage.setItem("theme", e.target.innerText.toLowerCase().trim())
-      updateTheme()
+  document.addEventListener("astro:page-load", () => {
+    applyTheme()
+    const menu = document.getElementById("themes-menu")
+    document.getElementById("theme-toggle-btn")?.addEventListener("click", (e) => {
+      e.stopPropagation()
+      menu?.classList.toggle("open")
+    })
+    document.querySelectorAll<HTMLElement>(".themes-menu-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        try {
+          localStorage.setItem(STORAGE_KEY, option.dataset.theme ?? "system")
+        } catch {
+          // Storage can be blocked (private mode); the choice then lasts for this page only.
+        }
+        applyTheme()
+      })
     })
   })
 </script>

@@ -1,62 +1,75 @@
 ---
-import LinkInline from "./LinkInline.astro"
+import { formatDuration, formatRange } from "@/lib/dates"
 
-interface Props {
+export interface Role {
   title: string
-  company: string
-  description: string
-  link?: string
-  date: string
-  side: 'left' | 'right'
+  type?: string
+  start: string
+  end?: string
+  summary?: string
 }
 
-const { title, company, description, link, date, side } = Astro.props
+interface Props {
+  company: string
+  roles: Role[]
+  points: string[]
+}
+
+const { company, roles, points } = Astro.props
+const grouped = roles.length > 1
+// Roles are listed newest first, so the group spans from the last role's start to the first role's end.
+const groupStart = roles[roles.length - 1].start
+const groupEnd = roles[0].end
 ---
 
-<li data-side={side} class={`group relative pb-16 md:w-1/2 ${side === 'right' ? 'md:ml-auto md:pl-8' : 'md:pr-8'}` }>
-  <span class="absolute left-1/2 -translate-x-1/2 top-0 w-3 h-3 rounded-full bg-yellow-400"></span>
-  <div class="experience-card bg-white/60 dark:bg-gray-800/60 backdrop-blur rounded-md p-4 shadow transform-gpu transition-transform duration-500">
-    <h3 class="text-xl font-bold text-yellow-400">{title}</h3>
-    <h4 class="font-semibold text-xl text-gray-600 dark:text-white">{company}</h4>
-    <time class="text-sm text-gray-600/80 dark:text-white/80">{date}</time>
-    <div class="mt-2 text-gray-600 dark:text-gray-300">{description}</div>
-    {
-      link && (
-        <LinkInline href={link}>
-          Saber más{" "}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-5 icon icon-tabler icon-tabler-chevron-right"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <>
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M9 6l6 6l-6 6" />
-            </>
-          </svg>
-        </LinkInline>
-      )
-    }
+<li class="relative pl-6 sm:pl-8">
+  <span
+    class="absolute -left-[9px] top-6 size-4 rounded-full border-4 border-gray-50 bg-yellow-500 dark:border-gray-950 dark:bg-yellow-400"
+    aria-hidden="true"
+  ></span>
+  <div
+    class="grid gap-x-8 gap-y-4 rounded-xl border border-gray-200 bg-white/70 p-5 shadow-sm dark:border-white/10 dark:bg-gray-900/70 lg:grid-cols-[minmax(0,320px)_1fr]"
+  >
+    <div>
+      {
+        grouped ? (
+          <>
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">{company}</h3>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{formatDuration(groupStart, groupEnd)}</p>
+            <ol class="mt-3 space-y-3 border-l-2 border-yellow-500/50 pl-3">
+              {roles.map((role) => (
+                <li>
+                  <h4 class="font-bold text-yellow-700 dark:text-yellow-400">{role.title}</h4>
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {role.type && <>{role.type} · </>}
+                    {formatRange(role.start, role.end)} · {formatDuration(role.start, role.end)}
+                  </p>
+                  {role.summary && <p class="mt-1 text-sm text-gray-700 dark:text-gray-300">{role.summary}</p>}
+                </li>
+              ))}
+            </ol>
+          </>
+        ) : (
+          <>
+            <h3 class="text-lg font-bold text-yellow-700 dark:text-yellow-400">{roles[0].title}</h3>
+            <p class="font-semibold text-gray-900 dark:text-white">{company}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">
+              {roles[0].type && <>{roles[0].type} · </>}
+              {formatRange(roles[0].start, roles[0].end)} · {formatDuration(roles[0].start, roles[0].end)}
+            </p>
+          </>
+        )
+      }
+    </div>
+    <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+      {
+        points.map((point) => (
+          <li class="flex gap-2">
+            <span class="mt-2 size-1.5 shrink-0 rounded-full bg-yellow-500 dark:bg-yellow-400" />
+            <span>{point}</span>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </li>
-
-<style is:global>
-  li[data-side="left"].group:hover .experience-card {
-    transform: perspective(800px) rotateY(-15deg);
-  }
-  li[data-side="right"].group:hover .experience-card {
-    transform: perspective(800px) rotateY(15deg);
-  }
-  @media (prefers-reduced-motion: reduce) {
-    li.group:hover .experience-card {
-      transform: none;
-    }
-  }
-</style>

@@ -2,70 +2,80 @@
 import Layout from "@/layouts/Layout.astro"
 
 import AboutMe from "@/components/AboutMe.astro"
+import ActionLink from "@/components/ActionLink.astro"
 import Briefcase from "@/components/icons/Briefcase.astro"
 import CodeIcon from "@/components/icons/Code.astro"
+import GitHubIcon from "@/components/icons/GitHub.astro"
 import Experience from "@/components/Experience.astro"
 import ProfileCheck from "@/components/icons/ProfileCheck.astro"
-import Projects from "@/components/Projects.astro"
+import FeaturedProjects from "@/components/FeaturedProjects.astro"
+import OpenSource from "@/components/OpenSource.astro"
 import SectionContainer from "@/components/SectionContainer.astro"
 import Hero from "@/components/Hero.astro"
 import Education from "@/components/Education.astro"
 import EducationHat from "@/components/icons/EducationHat.astro"
 import Chatbot from "@/components/Chatbot.astro"
+import { FEATURED_PROJECTS, MORE_PROJECTS } from "@/data/projects"
+
+const headingClass = "flex items-center mb-6 text-3xl font-semibold gap-x-3 text-gray-900 dark:text-white"
+const projectCount = FEATURED_PROJECTS.length + MORE_PROJECTS.length
 ---
 
 <Layout
-  title="Akshat Shah Portfolio - Aspiring Software Engineer , Grad Student"
-  description="You can find me at LinkedIn or Github"
+  title="Akshat Shah · Software Engineer"
+  description="Akshat Shah is a backend and full stack software engineer in Los Angeles (MS CS, USC 2026), open to relocating anywhere in the US."
 >
   <main class="px-4">
-    <SectionContainer class="py-16 md:py-36">
-      <Hero>
-      </slot>
-    </Hero>
+    <SectionContainer class="pt-28 pb-12 md:pt-32 md:pb-16">
+      <Hero />
     </SectionContainer>
-    <div class="space-y-24">
-      <SectionContainer id="education"> <!-- Add the Education section here -->
-        <h2
-          class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
-        >
-          <EducationHat class="size-8" />
-          Education
-        </h2>
-        <Education />
+    <div class="space-y-20">
+      <SectionContainer id="projects">
+        <div class="mb-6 flex flex-wrap items-end justify-between gap-4">
+          <h2 class={headingClass.replace("mb-6 ", "")}>
+            <CodeIcon class="size-7" />
+            Featured Projects
+          </h2>
+          <ActionLink href="/projects">See all {projectCount} projects →</ActionLink>
+        </div>
+        <FeaturedProjects />
       </SectionContainer>
-    <SectionContainer id="experience">
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
-      >
-        <Briefcase class="size-8" />
-        Experience
-      </h2>
-      <Experience />
-    </SectionContainer>
 
-    <SectionContainer id="projects">
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white"
-      >
-        <CodeIcon class="size-7" />
-        Projects
-      </h2>
-      <Projects />
-    </SectionContainer>
+      <SectionContainer id="experience">
+        <h2 class={headingClass}>
+          <Briefcase class="size-8" />
+          Experience
+        </h2>
+        <Experience />
+      </SectionContainer>
 
+      <SectionContainer id="open-source">
+        <h2 class={headingClass}>
+          <GitHubIcon class="size-8" />
+          Open Source
+        </h2>
+        <OpenSource variant="summary" />
+      </SectionContainer>
 
-
-    <SectionContainer id="about-me">
-      <h2
-        class="flex items-center mb-6 text-3xl font-semibold gap-x-8 text-black/80 dark:text-white"
-      >
-        <ProfileCheck class="size-8" />
-        About Me
-      </h2>
-      <AboutMe />
-    </SectionContainer>
-  </div>
+      <SectionContainer id="about-me">
+        <div class="grid gap-12 lg:grid-cols-[1fr_400px]">
+          <div>
+            <h2 class={headingClass}>
+              <ProfileCheck class="size-8" />
+              About Me
+            </h2>
+            <AboutMe />
+          </div>
+          <div id="education">
+            <h2 class={headingClass}>
+              <EducationHat class="size-8" />
+              Education
+            </h2>
+            <Education />
+          </div>
+        </div>
+      </SectionContainer>
+    </div>
   </main>
   <Chatbot />
 </Layout>

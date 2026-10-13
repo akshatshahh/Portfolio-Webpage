@@ -1,0 +1,23 @@
+---
+interface Props {
+  href: string
+  variant?: "primary" | "secondary"
+  external?: boolean
+}
+
+const { href, variant = "secondary", external = !href.startsWith("/") } = Astro.props
+
+const VARIANTS = {
+  primary: "bg-yellow-400 text-gray-900 hover:bg-yellow-300 border-yellow-400",
+  secondary:
+    "border-gray-300 bg-white text-gray-800 hover:border-gray-400 hover:bg-gray-50 dark:border-white/20 dark:bg-white/5 dark:text-gray-100 dark:hover:border-white/40 dark:hover:bg-white/10",
+}
+---
+
+<a
+  href={href}
+  {...external ? { target: "_blank", rel: "noopener noreferrer" } : {}}
+  class={`inline-flex items-center gap-2 rounded-lg border px-3.5 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-400 ${VARIANTS[variant]}`}
+>
+  <slot />
+</a>

@@ -1,5 +1,6 @@
 [build]
-  command = "pnpm build"
+  # Unit tests gate every deploy; browser tests run in GitHub Actions (.github/workflows/ci.yml).
+  command = "pnpm test:unit && pnpm build"
   publish = "dist"
 
 [functions]
