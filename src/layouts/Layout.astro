@@ -23,6 +23,18 @@ const { description, title } = Astro.props
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <ViewTransitions />
+    <script is:inline>
+      // Runs before first paint so a dark-mode visitor never sees a light flash.
+      ;(() => {
+        let theme = "system"
+        try {
+          theme = localStorage.getItem("theme") ?? "system"
+        } catch {}
+        const dark =
+          theme === "dark" || (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+        document.documentElement.classList.toggle("dark", dark)
+      })()
+    </script>
   </head>
 
   <body class="relative text-black dark:text-white">
