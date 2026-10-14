@@ -11,7 +11,7 @@ export interface ResumeEntry {
 
 export const RESUME = {
   name: "Akshat Shah",
-  contact: "akshatdi@usc.edu · linkedin.com/in/akshatshahh · github.com/akshatshahh · akshatshah.netlify.app",
+  contact: "akshatdi@usc.edu · linkedin.com/in/akshatshahh · github.com/akshatshahh · akshatshah.tech",
   tagline: "Software Engineer · Open to Relocation",
   sections: [
     {

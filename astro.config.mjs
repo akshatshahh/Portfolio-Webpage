@@ -5,6 +5,6 @@ import sitemap from "@astrojs/sitemap"
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://akshatshah.netlify.app',
+  site: 'https://akshatshah.tech',
   integrations: [tailwind(), sitemap(), robotsTxt()],
 })

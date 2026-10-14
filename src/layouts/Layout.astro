@@ -14,7 +14,7 @@ interface Props {
 }
 
 const { description, title, image = "/og.jpg" } = Astro.props
-const site = Astro.site ?? new URL("https://akshatshah.netlify.app")
+const site = Astro.site ?? new URL("https://akshatshah.tech")
 // Pages are served with a trailing slash (and listed that way in the sitemap).
 const path = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`
 const canonical = new URL(path, site).href

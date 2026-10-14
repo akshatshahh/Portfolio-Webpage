@@ -1,7 +1,7 @@
 # Akshat Shah · Portfolio
 
 Personal site built with [Astro](https://astro.build) and Tailwind CSS, deployed on Netlify.
-Live at [akshatshah.netlify.app](https://akshatshah.netlify.app).
+Live at [akshatshah.tech](https://akshatshah.tech) (the old `akshatshah.netlify.app` address redirects there).
 
 ## Develop
 
